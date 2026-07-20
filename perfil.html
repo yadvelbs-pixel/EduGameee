@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>EduGame | Mi Perfil</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+
+body{
+
+    margin:0;
+
+    font-family:Poppins, sans-serif;
+
+    background:linear-gradient(135deg,#c8a8ff,#6d28d9);
+
+}
+
+
+/* CONTENEDOR PRINCIPAL */
+
+.perfil{
+
+    width:100%;
+
+    min-height:100vh;
+
+    background:white;
+
+    border-radius:0;
+
+    padding:50px 80px;
+
+}
+
+
+/* CABECERA DEL PERFIL */
+
+.perfil-header{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:25px;
+
+}
+
+
+
+.avatar{
+
+    width:150px;
+
+    height:150px;
+
+    border-radius:50%;
+
+    background:#ede9fe;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    overflow:hidden;
+
+}
+
+
+.avatar img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+}
+
+
+
+.datos-principales h1{
+
+    font-size:35px;
+
+    margin:0;
+
+}
+
+
+
+/* TARJETAS DE INFORMACIÓN */
+
+.tarjetas{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:20px;
+
+}
+
+
+
+.tarjeta{
+
+    background:#fad9ed;
+
+    padding:25px;
+
+    border-radius:25px;
+
+    text-align:center;
+
+}
+
+
+
+/* PROGRESO */
+
+.progreso, 
+.logros{
+
+    margin-top:35px;
+
+}
+
+
+
+.barra-contenedor{
+
+    width:100%;
+
+    height:20px;
+
+    background:#ddd;
+
+    border-radius:20px;
+
+}
+
+
+
+.barra{
+
+    height:100%;
+
+    width:0%;
+
+    border-radius:20px;
+
+    background:#81f19d;
+
+}
+
+
+
+/* LOGROS */
+
+.lista-logros{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:15px;
+
+}
+
+
+
+.logro{
+
+    background:#f5f3ff;
+
+    padding:15px;
+
+    border-radius:15px;
+
+}
+
+
+
+/* BOTÓN */
+
+#cerrarSesion{
+
+    margin-top:30px;
+
+    padding:12px 25px;
+
+    border:none;
+
+    border-radius:20px;
+
+    cursor:pointer;
+
+}
+
+#cerrarSesion{
+
+background:#7c3aed;
+color:white;
+font-weight:600;
+transition:.3s;
+
+}
+
+
+#cerrarSesion:hover{
+
+transform:translateY(-5px);
+background:#5b21b6;
+
+}
+
+
+#cerrarSesion:active{
+
+transform:scale(.95);
+
+}
+
+/* PERFIL DE RACHITA */
+
+.rachita-perfil{
+
+    margin-top:40px;
+
+    background:linear-gradient(135deg,#ede9fe,#ddd6fe);
+
+    border-radius:30px;
+
+    padding:30px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:30px;
+
+}
+
+/* ANIMACIÓN DEL TABLERO DE RACHITA */
+
+.rachita-perfil{
+
+    transition:.4s;
+
+}
+
+
+.rachita-perfil:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 15px 30px rgba(109,40,217,.25);
+
+}
+
+
+.rachita-perfil:active{
+
+    transform:scale(.97);
+
+}
+.rachita-imagen img{
+
+    width:170px;
+
+    height:170px;
+
+    object-fit:contain;
+
+}
+
+
+
+.rachita-info h2{
+
+    margin:0;
+
+    color:#6d28d9;
+
+    font-size:32px;
+
+}
+
+
+
+.rachita-info p{
+
+    font-size:18px;
+
+}
+
+
+
+.estado-racha{
+
+    display:flex;
+
+    gap:20px;
+
+    margin-top:20px;
+
+}
+
+
+
+.estado{
+
+    background:white;
+
+    padding:15px 25px;
+
+    border-radius:20px;
+
+    text-align:center;
+
+}
+
+.estado{
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+
+.estado:hover{
+
+    transform:scale(1.05);
+
+}
+
+
+.estado strong{
+
+    display:block;
+
+    font-size:25px;
+
+    color:#7c3aed;
+
+}
+#rachitaImagen{
+
+    transition:.4s;
+
+    cursor:pointer;
+
+}
+
+
+#rachitaImagen:hover{
+
+    transform:scale(1.08) rotate(3deg);
+
+}
+
+.interactiva{
+
+    cursor:pointer;
+
+    transition:0.3s;
+
+}
+
+
+.interactiva:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 15px 25px rgba(124,58,237,.25);
+
+}
+
+
+
+.interactiva:active{
+
+    transform:scale(0.95);
+
+}
+
+#editarPerfil{
+
+margin-top:15px;
+
+padding:10px 25px;
+
+border:none;
+
+border-radius:20px;
+
+background:#22C55E;
+
+color:white;
+
+font-weight:700;
+
+cursor:pointer;
+
+}
+
+
+#editarPerfil:hover{
+
+transform:scale(1.05);
+
+}
+
+
+
+.editor{
+
+display:none;
+
+margin-top:20px;
+
+background:#f5f3ff;
+
+padding:20px;
+
+border-radius:20px;
+
+}
+
+
+
+.editor input{
+
+padding:12px;
+
+border-radius:15px;
+
+border:2px solid #ddd;
+
+margin:8px;
+
+}
+
+
+#guardarPerfil{
+
+background:#7c3aed;
+
+color:white;
+
+border:none;
+
+padding:12px 25px;
+
+border-radius:20px;
+
+cursor:pointer;
+
+}
+
+</style>
+
+
+</head>
+
+
+
+<body>
+
+
+<div class="perfil">
+
+
+<header class="perfil-header">
+
+
+<div class="avatar">
+
+<img id="imagenPerfil" 
+src="https://cdn-icons-png.flaticon.com/512/149/149071.png" 
+alt="Avatar del usuario">
+
+</div>
+
+
+
+<div class="datos-principales">
+
+
+<h1 id="nombreUsuario">
+
+Usuario EduGame
+
+</h1>
+
+
+
+<p id="correoUsuario">
+@username.com
+</p>
+
+<button id="editarPerfil">
+Editar perfil
+</button>
+
+<div class="editor" id="editorPerfil">
+
+<input 
+id="nuevoNombre"
+placeholder="Nuevo nombre">
+
+
+<button id="guardarPerfil">
+Guardar cambios
+</button>
+
+
+</div>
+
+<div class="racha">
+
+<span> Racha:</span>
+
+<strong id="rachaUsuario">
+
+0 días
+
+</strong>
+
+</div>
+
+</div>
+
+
+</header>
+
+<section class="rachita-perfil interactiva">
+
+<div class="rachita-imagen">
+
+<img id="rachitaImagen"
+src="images/rachita.png"
+alt="Rachita EduGame">
+
+</div>
+
+
+
+<div class="rachita-info">
+
+
+<h2>
+Mi rachita
+</h2>
+
+<p>
+
+¡Sigue aprendiendo para hacer crecer tu racha!
+
+</p>
+
+
+
+<div class="estado-racha">
+
+
+<div class="estado interactiva">
+
+<strong id="diasRacha">
+
+0
+
+</strong>
+
+Días de racha
+
+</div>
+
+
+
+<div class="estado">
+
+<strong id="nivelRacha">
+
+Nivel 1
+
+</strong>
+
+Nivel
+
+</div>
+
+
+
+<div class="estado">
+
+<strong id="crecimientoRacha">
+
+0%
+
+</strong>
+
+Crecimiento
+
+</div>
+
+</div>
+</div>
+
+</section>
+<section class="informacion">
+
+<h2>
+Mi información
+</h2>
+
+
+<div class="tarjetas">
+
+
+<div class="tarjeta interactiva">
+
+<h3>
+Nivel
+</h3>
+
+<p id="nivelUsuario">
+Principiante
+</p>
+
+</div>
+
+
+
+<div class="tarjeta interactiva">
+
+<h3>
+Puntos
+</h3>
+
+<p id="puntosUsuario">
+0
+</p>
+
+</div>
+
+
+
+<div class="tarjeta interactiva">
+
+<h3>
+Retos completados
+</h3>
+
+<p id="retosUsuario">
+0
+</p>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<section class="progreso">
+
+<h2>
+
+Mi progreso
+
+</h2>
+
+<div class="barra-contenedor">
+
+
+<div class="barra" id="barraProgreso">
+
+</div>
+
+
+</div>
+
+
+
+<p id="textoProgreso">
+
+0% completado
+
+</p>
+
+
+</section>
+<section class="logros">
+
+<h2>
+
+Mis logros
+
+</h2>
+
+<div class="lista-logros">
+
+
+<div class="logro interactiva" data-logro="Primer reto completado">
+
+<span>
+Primer reto completado
+</span>
+
+</div>
+
+
+<div class="logro interactiva" data-logro="Primera racha">
+
+<span>
+Primera racha
+</span>
+
+</div>
+
+
+<div class="logro interactiva" data-logro="Explorador matemático">
+
+<span>
+Explorador matemático
+</span>
+
+</div>
+</div>
+
+
+</section>
+
+
+<button id="cerrarSesion">
+
+Cerrar sesión
+
+</button>
+
+</div>
+
+<script type="module">
+
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+
+import {
+getAuth,
+onAuthStateChanged,
+signOut
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+
+import {
+getFirestore,
+doc,
+getDoc,
+updateDoc
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+
+// CONFIGURACIÓN FIREBASE
+
+const firebaseConfig = {
+
+    apiKey: "AIzaSyDW4w9TOyboiDPjvxjiFrExPSjuX18Wshk",
+
+    authDomain: "edugame-340db.firebaseapp.com",
+
+    projectId: "edugame-340db",
+
+    storageBucket: "edugame-340db.firebasestorage.app",
+
+    messagingSenderId: "150012921820",
+
+    appId: "1:150012921820:web:08a6a4aa18ae5a29ef3119"
+
+};
+
+
+
+const app = initializeApp(firebaseConfig);
+
+
+const auth = getAuth(app);
+
+
+const db = getFirestore(app);
+
+
+
+// ELEMENTOS
+
+const nombreUsuario =
+document.getElementById("nombreUsuario");
+
+
+const correoUsuario =
+document.getElementById("correoUsuario");
+
+
+const imagenPerfil =
+document.getElementById("imagenPerfil");
+
+
+const rachaUsuario =
+document.getElementById("rachaUsuario");
+
+
+const diasRacha =
+document.getElementById("diasRacha");
+
+
+const nivelRacha =
+document.getElementById("nivelRacha");
+
+
+const nivelUsuario =
+document.getElementById("nivelUsuario");
+
+
+const puntosUsuario =
+document.getElementById("puntosUsuario");
+
+
+const retosUsuario =
+document.getElementById("retosUsuario");
+
+
+const barraProgreso =
+document.getElementById("barraProgreso");
+
+
+const textoProgreso =
+document.getElementById("textoProgreso");
+
+const editarPerfil =
+document.getElementById("editarPerfil");
+
+
+const editorPerfil =
+document.getElementById("editorPerfil");
+
+
+
+editarPerfil.onclick=()=>{
+
+editorPerfil.style.display="block";
+
+};
+
+
+// CARGAR USUARIO
+
+
+onAuthStateChanged(auth, async(user)=>{
+
+
+if(user){
+
+
+console.log("Usuario conectado:",user.email);
+
+
+
+correoUsuario.textContent =
+user.email;
+
+
+
+const referencia =
+doc(db,"usuarios",user.uid);
+
+
+
+const documento =
+await getDoc(referencia);
+
+
+
+if(documento.exists()){
+
+
+
+const datos =
+documento.data();
+
+
+
+console.log("Datos:",datos);
+
+
+
+// CREAR NOMBRE A PARTIR DEL CORREO
+
+let nombre = user.email
+.split("@")[0]
+.replace(/[0-9]/g,"")
+.replace("."," ");
+
+
+nombreUsuario.textContent =
+nombre.charAt(0).toUpperCase() + nombre.slice(1);
+
+
+rachaUsuario.textContent =
+"🔥 " + (datos.nivelDesbloqueado || 1) + " niveles";
+
+
+diasRacha.textContent =
+datos.nivelDesbloqueado || 1;
+
+
+
+// NIVEL ACTUAL
+
+nivelUsuario.textContent =
+"Nivel " + (datos.nivelActual || 1);
+
+
+nivelRacha.textContent =
+"Nivel " + (datos.nivelActual || 1);
+
+
+// XP
+
+puntosUsuario.textContent =
+datos.xp || 0;
+
+
+// RETOS COMPLETADOS
+
+let retos = 0;
+
+if(datos.niveles){
+
+    Object.values(datos.niveles).forEach(valor=>{
+
+        if(valor === true){
+
+            retos++;
+
+        }
+
+    });
+
+}
+
+
+retosUsuario.textContent = retos;
+
+
+
+// PROGRESO
+
+let progreso = 
+((datos.nivelDesbloqueado || 1) / 5) * 100;
+
+
+barraProgreso.style.width =
+progreso + "%";
+
+
+textoProgreso.textContent =
+Math.round(progreso) + "% completado";
+
+
+if(datos.foto){
+
+imagenPerfil.src =
+datos.foto;
+
+}
+
+
+
+}else{
+
+
+console.log("No existe perfil en Firestore");
+
+
+}
+
+
+
+}else{
+
+
+console.log("Usuario no conectado");
+
+
+}
+
+
+
+});
+
+
+document
+.getElementById("guardarPerfil")
+.onclick = async()=>{
+
+
+const usuario = auth.currentUser;
+
+
+const nuevoNombre =
+document.getElementById("nuevoNombre").value;
+
+
+
+if(nuevoNombre.trim()==""){
+
+alert("Escribe un nombre");
+
+return;
+
+}
+
+
+
+await updateDoc(
+
+doc(db,"usuarios",usuario.uid),
+
+{
+
+nombre:nuevoNombre
+
+}
+
+);
+
+
+
+nombreUsuario.textContent=nuevoNombre;
+
+// OCULTAR EDITOR DESPUÉS DE GUARDAR
+editorPerfil.style.display="none";
+
+
+alert("Nombre actualizado correctamente");
+
+
+};
+
+// CERRAR SESIÓN
+
+
+document
+.getElementById("cerrarSesion")
+.addEventListener("click",()=>{
+
+
+signOut(auth)
+.then(()=>{
+
+
+window.location.href="login.html";
+
+
+});
+
+
+});
+
+// FUNCIONAMIENTO DE LOGROS
+
+const logros = document.querySelectorAll(".logro");
+
+
+logros.forEach(logro=>{
+
+
+logro.onclick=()=>{
+
+
+let nombreLogro = logro.dataset.logro;
+
+
+if(nombreLogro === "Primer reto completado"){
+
+
+alert("¡Felicidades! Completaste tu primer reto matemático.");
+
+
+}
+
+
+if(nombreLogro === "Primera racha"){
+
+
+alert("¡Tu racha está creciendo! Sigue aprendiendo cada día.");
+
+
+}
+
+
+if(nombreLogro === "Explorador matemático"){
+
+
+alert("¡Gran trabajo! Has explorado el mundo de las matemáticas.");
+
+
+}
+
+
+
+};
+
+
+});
+
+
+</script>
+</body>
+
+</html>

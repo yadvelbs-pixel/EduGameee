@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>EduGame | Nivel 2 - Desafío Algebraico</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+
+background:linear-gradient(135deg,#5B21B6,#7C3AED,#A855F7);
+
+min-height:100vh;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+padding:20px;
+
+}
+
+.contenedor{
+
+width:100%;
+max-width:950px;
+
+background:white;
+
+border-radius:30px;
+
+padding:35px;
+
+box-shadow:0 20px 45px rgba(0,0,0,.2);
+
+}
+
+.barraSuperior{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin-bottom:30px;
+
+}
+
+.info{
+
+background:#F3E8FF;
+
+padding:12px 22px;
+
+border-radius:30px;
+
+font-weight:700;
+
+color:#5B21B6;
+
+font-size:18px;
+
+}
+
+.progreso{
+
+margin-bottom:25px;
+
+}
+
+#textoPregunta{
+
+text-align:center;
+
+font-size:20px;
+
+font-weight:700;
+
+color:#5B21B6;
+
+margin-bottom:12px;
+
+}
+
+.barra{
+
+height:16px;
+
+background:#E5E7EB;
+
+border-radius:20px;
+
+overflow:hidden;
+
+}
+
+#avance{
+
+height:100%;
+
+width:6.6%;
+
+background:#22C55E;
+
+transition:.5s;
+
+}
+
+.mascota{
+
+display:flex;
+
+justify-content:center;
+
+margin:25px 0;
+
+}
+
+.mascota img{
+
+width:180px;
+
+}
+
+#pregunta{
+
+text-align:center;
+
+font-size:34px;
+
+color:#5B21B6;
+
+margin-bottom:30px;
+
+}
+
+.opciones{
+
+display:grid;
+
+grid-template-columns:repeat(2,1fr);
+
+gap:20px;
+
+}
+
+.opcion{
+
+padding:18px;
+
+border:none;
+
+border-radius:18px;
+
+font-size:20px;
+
+cursor:pointer;
+
+background:#F3E8FF;
+
+transition:.3s;
+
+font-weight:600;
+
+}
+
+.opcion:hover{
+
+transform:scale(1.03);
+
+background:#DDD6FE;
+
+}
+
+.opcion.correcta{
+
+background:#22C55E;
+
+color:white;
+
+}
+
+.opcion.incorrecta{
+
+background:#EF4444;
+
+color:white;
+
+}
+
+#btnResponder{
+
+display:block;
+
+margin:35px auto 0;
+
+padding:15px 50px;
+
+border:none;
+
+background:#22C55E;
+
+color:white;
+
+font-size:22px;
+
+border-radius:40px;
+
+cursor:pointer;
+
+font-weight:700;
+
+transition:.3s;
+
+}
+
+#btnResponder:hover{
+
+background:#16A34A;
+
+transform:scale(1.05);
+
+}
+
+@media(max-width:768px){
+
+.opciones{
+
+grid-template-columns:1fr;
+
+}
+
+#pregunta{
+
+font-size:26px;
+
+}
+
+.barraSuperior{
+
+flex-direction:column;
+
+gap:12px;
+
+}
+
+.mascota img{
+
+width:130px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="contenedor">
+
+    <!-- Barra superior -->
+    <div class="barraSuperior">
+
+        <div class="info">
+            ⭐ XP:
+            <span id="xp">0</span>
+        </div>
+
+        <div class="info">
+            Monedas:
+            <span id="monedas">0</span>
+        </div>
+
+        <div class="info">
+        
+            <span id="tiempo">02:30</span>
+        </div>
+
+    </div>
+
+    <!-- Barra de progreso -->
+
+    <div class="progreso">
+
+        <p id="textoPregunta">
+
+            Pregunta 1 de 15
+
+        </p>
+
+        <div class="barra">
+
+            <div id="avance"></div>
+
+        </div>
+
+    </div>
+
+    <!-- Mascota -->
+
+    <div class="mascota">
+
+        <!-- Cambia la ruta por la imagen de tu mascota -->
+        <img src="images/rachiñi.png" alt="Mascota EduGame" id="mascota">
+
+    </div>
+
+    <!-- Pregunta -->
+
+    <h2 id="pregunta">
+
+        Cargando pregunta...
+
+    </h2>
+
+    <!-- Opciones -->
+
+    <div class="opciones">
+
+        <button class="opcion" id="op0"></button>
+
+        <button class="opcion" id="op1"></button>
+
+        <button class="opcion" id="op2"></button>
+
+        <button class="opcion" id="op3"></button>
+
+    </div>
+
+    <!-- Botón -->
+
+    <button id="btnResponder">
+
+        RESPONDER
+
+    </button>
+
+</div>
+
+<!-- Aquí comenzará el JavaScript -->
+
+<script type="module">
+
+    // =============================
+// VARIABLES
+// =============================
+
+const preguntas = [
+
+{
+pregunta:"Si x = 4, ¿cuánto vale 3x + 5?",
+opciones:["15","17","19","12"],
+correcta:1
+},
+
+{
+pregunta:"Simplifica: 5a + 3a",
+opciones:["8a","15a","2a","53a"],
+correcta:0
+},
+
+{
+pregunta:"Resuelve: 2x = 18",
+opciones:["8","10","9","12"],
+correcta:2
+},
+
+{
+pregunta:"Simplifica: 7y - 2y",
+opciones:["5y","9y","7y","2y"],
+correcta:0
+},
+
+{
+pregunta:"Si x = 5, ¿cuánto vale 2x²?",
+opciones:["25","10","50","20"],
+correcta:2
+},
+
+{
+pregunta:"Factoriza: 6x + 12",
+opciones:["6(x+2)","3(x+4)","2(3x+12)","12(x+6)"],
+correcta:0
+},
+
+{
+pregunta:"Simplifica: 8m - 3m + 2m",
+opciones:["7m","5m","13m","3m"],
+correcta:0
+},
+
+{
+pregunta:"Resuelve: x + 8 = 20",
+opciones:["10","12","18","28"],
+correcta:1
+},
+
+{
+pregunta:"Simplifica: 9p - 4p",
+opciones:["5p","13p","36p","p"],
+correcta:0
+},
+
+{
+pregunta:"Si x = 2, ¿cuánto vale 4x + 6?",
+opciones:["12","14","10","16"],
+correcta:1
+},
+
+{
+pregunta:"Resuelve: 3x - 6 = 9",
+opciones:["3","4","5","6"],
+correcta:2
+},
+
+{
+pregunta:"Simplifica: 2a + 5a - a",
+opciones:["6a","8a","7a","5a"],
+correcta:0
+},
+
+{
+pregunta:"Si x = 3, ¿cuánto vale 5² + x?",
+opciones:["25","26","28","30"],
+correcta:2
+},
+
+{
+pregunta:"Factoriza: 4x + 20",
+opciones:["4(x+5)","2(x+10)","20(x+4)","x(4+20)"],
+correcta:0
+},
+
+{
+pregunta:"Resuelve: 5x = 35",
+opciones:["5","6","7","8"],
+correcta:2
+}
+
+];
+
+let indice = 0;
+let seleccion = -1;
+let xp = 0;
+let monedas = 0;
+
+// =============================
+// CARGAR PREGUNTA
+// =============================
+
+function cargarPregunta(){
+
+seleccion = -1;
+
+document.querySelectorAll(".opcion").forEach(b=>{
+
+b.classList.remove("correcta");
+b.classList.remove("incorrecta");
+
+});
+
+const p = preguntas[indice];
+
+document.getElementById("pregunta").textContent = p.pregunta;
+
+document.getElementById("op0").textContent = "A) " + p.opciones[0];
+document.getElementById("op1").textContent = "B) " + p.opciones[1];
+document.getElementById("op2").textContent = "C) " + p.opciones[2];
+document.getElementById("op3").textContent = "D) " + p.opciones[3];
+
+document.getElementById("textoPregunta").textContent =
+"Pregunta " + (indice+1) + " de " + preguntas.length;
+
+document.getElementById("avance").style.width =
+((indice+1)/preguntas.length)*100 + "%";
+
+}
+
+cargarPregunta();
+
+// =============================
+// SELECCIONAR OPCIÓN
+// =============================
+
+document.querySelectorAll(".opcion").forEach((boton,i)=>{
+
+boton.onclick=()=>{
+
+seleccion=i;
+
+document.querySelectorAll(".opcion").forEach(b=>{
+
+b.style.border="none";
+
+});
+
+boton.style.border="3px solid #5B21B6";
+
+}
+
+});
+
+// =============================
+// RESPONDER
+// =============================
+
+document.getElementById("btnResponder").onclick=()=>{
+
+if(seleccion==-1){
+
+alert("Selecciona una respuesta.");
+
+return;
+
+}
+
+const correcta = preguntas[indice].correcta;
+
+if(seleccion==correcta){
+
+document.querySelectorAll(".opcion")[seleccion].classList.add("correcta");
+
+xp +=20;
+
+monedas +=5;
+
+}else{
+
+document.querySelectorAll(".opcion")[seleccion].classList.add("incorrecta");
+
+document.querySelectorAll(".opcion")[correcta].classList.add("correcta");
+
+}
+
+document.getElementById("xp").textContent=xp;
+
+document.getElementById("monedas").textContent=monedas;
+
+setTimeout(()=>{
+
+indice++;
+
+if(indice<preguntas.length){
+
+cargarPregunta();
+
+}else{
+
+// DESBLOQUEAR NIVEL 3
+localStorage.setItem("nivel3Desbloqueado","true");
+
+guardarProgreso();
+
+document.querySelector(".contenedor").innerHTML=`
+
+<h1 style="color:#5B21B6;text-align:center;">
+¡Nivel Completado!
+</h1>
+
+<br>
+
+<h2 style="text-align:center;">
+Has superado el Nivel 2
+</h2>
+
+<br>
+
+<h2 style="text-align:center;color:#22C55E;">
+⭐ XP obtenida: ${xp}
+</h2>
+
+<h2 style="text-align:center;color:#F59E0B;">
+$ Monedas: ${monedas}
+</h2>
+
+<br>
+
+<div style="text-align:center;">
+
+<button onclick="location.href='niveles.html'"
+
+style="padding:15px 40px;
+background:#22C55E;
+color:white;
+border:none;
+border-radius:30px;
+font-size:20px;
+cursor:pointer;">
+
+Volver a niveles
+
+</button>
+
+</div>
+
+`;
+
+}
+
+},1200);
+
+};
+
+// =============================
+// TEMPORIZADOR
+// =============================
+
+let tiempo = 150;
+
+const reloj = setInterval(()=>{
+
+let min = Math.floor(tiempo/60);
+
+let seg = tiempo%60;
+
+document.getElementById("tiempo").textContent =
+String(min).padStart(2,"0")+":"+
+String(seg).padStart(2,"0");
+
+tiempo--;
+
+if(tiempo<0){
+
+clearInterval(reloj);
+
+alert("¡Se acabó el tiempo!");
+
+location.reload();
+
+}
+
+},1000);
+
+// ======================================
+// FIREBASE
+// ======================================
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+getAuth
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+import {
+getFirestore,
+doc,
+updateDoc,
+setDoc,
+increment
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyDW4w9TOyboiDPjvxjiFrExPSjuX18Wshk",
+
+authDomain: "edugame-340db.firebaseapp.com",
+
+projectId: "edugame-340db",
+
+storageBucket: "edugame-340db.firebasestorage.app",
+
+messagingSenderId: "150012921820",
+
+appId: "1:150012921820:web:08a6a4aa18ae5a29ef3119"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const db = getFirestore(app);
+
+// Guarda el progreso del usuario
+async function guardarProgreso(){
+
+const usuario = auth.currentUser;
+
+
+if(!usuario){
+
+console.log("No hay usuario conectado");
+
+return;
+
+}
+
+
+
+try{
+
+
+await setDoc(
+
+doc(db,"usuarios",usuario.uid),
+
+{
+
+xp: increment(xp),
+
+monedas: increment(monedas),
+
+nivelActual:2,
+
+niveles:{
+nivel2:true,
+nivel3:true
+}
+
+},
+
+{merge:true}
+
+);
+
+
+
+console.log("Nivel 3 desbloqueado correctamente");
+
+
+
+}catch(error){
+
+console.error(
+"Error guardando progreso:",
+error
+);
+
+}
+
+
+}
+</script>
+
+</body>
+
+</html>

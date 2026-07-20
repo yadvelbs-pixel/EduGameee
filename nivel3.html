@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>EduGame | Nivel 3</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Poppins,sans-serif;
+}
+
+
+body{
+
+    background:linear-gradient(135deg,#e8d9ff,#6d28d9,#8b5cf6);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    min-height:100vh;
+
+}
+
+
+
+.contenedor{
+
+    width:1100px;
+
+    background:white;
+
+    border-radius:35px;
+
+    padding:30px;
+
+    display:flex;
+
+    gap:30px;
+
+    box-shadow:0 20px 45px rgba(0,0,0,.15);
+
+}
+
+
+
+.izquierda{
+
+    width:330px;
+
+    min-width:330px;
+
+    text-align:center;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+}
+
+
+
+.izquierda img{
+
+    width:380px;
+
+    max-width:none;
+
+    margin-top:20px;
+
+    animation:flotar 3s infinite ease-in-out;
+
+}
+
+@keyframes flotar{
+
+    50%{
+
+        transform:translateY(-12px);
+
+    }
+
+}
+
+
+
+.racha{
+
+    background:#F3F0FF;
+
+    padding:20px;
+
+    border-radius:20px;
+
+    font-size:20px;
+
+    font-weight:bold;
+
+    color:#6D28D9;
+
+}
+
+
+
+.derecha{
+
+    flex:1;
+
+}
+
+
+
+h1{
+
+    color:#5B21B6;
+
+    margin-bottom:10px;
+
+}
+
+
+
+.progreso{
+
+    height:18px;
+
+    background:#ddd;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    margin-bottom:25px;
+
+}
+
+
+
+.barra{
+
+    height:100%;
+
+    width:10%;
+
+    background:#22C55E;
+
+    transition:.5s;
+
+}
+
+
+
+.timer{
+
+    font-size:20px;
+
+    font-weight:bold;
+
+    color:#EF4444;
+
+    margin-bottom:20px;
+
+}
+
+
+
+.tarjeta{
+
+    background:#faf5ff;
+
+    padding:35px;
+
+    border-radius:25px;
+
+    text-align:center;
+
+}
+
+
+
+.pregunta
+
+.numeroPregunta{
+
+display:inline-block;
+
+background:#6D28D9;
+
+color:white;
+
+padding:8px 25px;
+
+border-radius:20px;
+
+font-size:18px;
+
+font-weight:bold;
+
+margin-bottom:25px;
+
+}
+
+
+.pregunta{
+
+font-size:25px;
+
+font-weight:600;
+
+line-height:1.5;
+
+margin-bottom:30px;
+
+}
+
+
+
+.opciones{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:20px;
+
+}
+
+
+
+.opciones button{
+
+    padding:18px;
+
+    border-radius:30px;
+
+    border:2px solid #ddd;
+
+    background:white;
+
+    font-size:20px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+
+
+.opciones button:hover{
+
+    background:#ede9fe;
+
+}
+
+
+
+#mensaje{
+
+    margin-top:25px;
+
+    font-size:20px;
+
+    font-weight:bold;
+
+}
+
+
+
+#explicacion{
+
+    margin-top:20px;
+
+    font-size:18px;
+
+    color:#444;
+
+}
+
+
+
+#siguiente{
+
+    display:none;
+
+    margin-top:30px;
+
+    padding:15px 40px;
+
+    border:none;
+
+    background:#22C55E;
+
+    color:white;
+
+    font-size:18px;
+
+    border-radius:30px;
+
+    cursor:pointer;
+
+}
+
+
+</style>
+
+</head>
+
+
+
+<body>
+
+
+<div class="contenedor">
+
+
+<div class="izquierda">
+
+
+<img id="rachaImg" src="images/raaa.png"> </div>
+
+
+
+<div class="derecha">
+
+
+<h1>
+
+Nivel 3 - Maestro Geométrico
+
+</h1>
+
+
+
+<div class="progreso">
+
+<div class="barra" id="barra"></div>
+
+</div>
+
+
+
+<div class="timer">
+
+Tiempo:
+
+<span id="tiempo">
+
+30
+
+</span>
+
+</div>
+
+
+
+<div class="tarjeta">
+
+
+<div id="numeroPregunta"></div>
+
+<div id="pregunta" class="pregunta">
+
+</div>
+
+
+<div class="opciones" id="opciones">
+
+</div>
+
+
+<div id="mensaje"></div>
+
+
+<div id="explicacion"></div>
+
+
+<button id="siguiente">
+
+Siguiente →
+
+</button>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+<script type="module">
+
+
+const preguntas=[
+
+
+{
+
+pregunta:"Un jardín rectangular mide 12 m de largo y 8 m de ancho. ¿Cuál es su área?",
+
+opciones:["96 m²","40 m²","20 m²","48 m²"],
+
+correcta:0,
+
+explicacion:"Área = largo × ancho\n12 × 8 = 96 m²."
+
+},
+
+
+{
+
+pregunta:"Un cuadrado tiene lado de 15 cm. ¿Cuál es su perímetro?",
+
+opciones:["60 cm","30 cm","45 cm","225 cm"],
+
+correcta:0,
+
+explicacion:"Perímetro = 4 × lado\n4 × 15 = 60 cm."
+
+},
+
+
+{
+
+pregunta:"Un terreno triangular tiene base 18 m y altura 10 m. ¿Cuál es su área?",
+
+opciones:["180 m²","90 m²","28 m²","360 m²"],
+
+correcta:1,
+
+explicacion:"Área = (base × altura)/2\n(18 ×10)/2 = 90 m²."
+
+},
+
+
+{
+
+pregunta:"Un prisma tiene 8 vértices. ¿Qué figura es?",
+
+opciones:["Cubo","Triángulo","Círculo","Rectángulo"],
+
+correcta:0,
+
+explicacion:"El cubo posee 8 vértices."
+
+},
+
+
+{
+
+pregunta:"¿Cuántos grados tiene un ángulo recto?",
+
+opciones:["180°","45°","90°","360°"],
+
+correcta:2,
+
+explicacion:"Todo ángulo recto mide exactamente 90°."
+
+},
+
+
+{
+
+pregunta:"Una piscina mide 25 m de largo y 12 m de ancho. ¿Cuál es su perímetro?",
+
+opciones:["74 m","300 m","50 m","37 m"],
+
+correcta:0,
+
+explicacion:"Perímetro=(25+12)×2=74 m."
+
+},
+
+
+{
+
+pregunta:"¿Cuántas caras tiene un cubo?",
+
+opciones:["8","6","12","10"],
+
+correcta:1,
+
+explicacion:"Todo cubo tiene 6 caras."
+
+},
+
+
+{
+
+pregunta:"Un círculo tiene radio de 7 cm. ¿Cuál es el diámetro?",
+
+opciones:["14 cm","49 cm","21 cm","7 cm"],
+
+correcta:0,
+
+explicacion:"Diámetro = radio ×2 =14 cm."
+
+},
+
+
+{
+
+pregunta:"¿Qué figura tiene exactamente tres lados?",
+
+opciones:["Pentágono","Rectángulo","Triángulo","Hexágono"],
+
+correcta:2,
+
+explicacion:"El triángulo tiene tres lados."
+
+},
+
+
+{
+
+pregunta:"Un rectángulo mide 20 cm por 15 cm. ¿Cuál es su área?",
+
+opciones:["300 cm²","70 cm²","600 cm²","35 cm²"],
+
+correcta:0,
+
+explicacion:"Área=20×15=300 cm²."
+
+}
+
+
+];
+
+
+
+let actual=0;
+
+let tiempo=30;
+
+let intervalo;
+
+
+const pregunta=document.getElementById("pregunta");
+
+const opciones=document.getElementById("opciones");
+
+const mensaje=document.getElementById("mensaje");
+
+const explicacion=document.getElementById("explicacion");
+
+const barra=document.getElementById("barra");
+
+const siguiente=document.getElementById("siguiente");
+
+const reloj=document.getElementById("tiempo");
+
+const racha=document.getElementById("rachaImg");
+
+
+let aciertos=0;
+
+
+
+cargarPregunta();
+
+
+
+function cargarPregunta(){
+
+
+clearInterval(intervalo);
+
+
+tiempo=30;
+
+
+reloj.textContent=tiempo;
+
+
+intervalo=setInterval(contador,1000);
+
+
+mensaje.textContent="";
+
+explicacion.textContent="";
+
+siguiente.style.display="none";
+
+
+
+let p=preguntas[actual];
+
+
+
+document.getElementById("numeroPregunta").textContent=
+"Problema "+(actual+1)+" de "+preguntas.length;
+
+
+pregunta.textContent=p.pregunta;
+
+
+
+opciones.innerHTML="";
+
+
+
+p.opciones.forEach((opcion,index)=>{
+
+
+let boton=document.createElement("button");
+
+
+boton.textContent=opcion;
+
+
+boton.onclick=function(){
+
+responder(index);
+
+}
+
+
+opciones.appendChild(boton);
+
+
+
+});
+
+
+
+barra.style.width=((actual+1)/preguntas.length*100)+"%";
+
+
+}
+
+
+
+
+function contador(){
+
+
+tiempo--;
+
+
+reloj.textContent=tiempo;
+
+
+
+if(tiempo<=0){
+
+
+clearInterval(intervalo);
+
+
+mensaje.style.color="red";
+
+
+mensaje.textContent="Tiempo agotado";
+
+
+explicacion.textContent=preguntas[actual].explicacion;
+
+
+siguiente.style.display="inline-block";
+
+
+}
+
+
+}
+
+
+
+
+
+function responder(respuesta){
+
+
+clearInterval(intervalo);
+
+
+
+let correcta=preguntas[actual].correcta;
+
+
+
+if(respuesta==correcta){
+
+
+mensaje.style.color="green";
+
+
+mensaje.textContent="¡Correcto!";
+
+
+aciertos++;
+
+
+
+}else{
+
+
+mensaje.style.color="red";
+
+
+mensaje.textContent="Incorrecto";
+
+explicacion.textContent=preguntas[actual].explicacion;
+
+
+
+}
+
+
+
+siguiente.style.display="inline-block";
+
+
+}
+
+
+siguiente.onclick=function(){
+
+
+racha.src="images/rachilent.png"; 
+
+
+actual++;
+
+
+if(actual<preguntas.length){
+
+
+cargarPregunta();
+
+
+
+}else{
+
+
+finalizar();
+
+
+}
+
+
+}
+
+async function finalizar(){
+
+    clearInterval(intervalo);
+
+    // Desbloquear el Nivel 4
+    localStorage.setItem("nivel4Desbloqueado","true");
+
+    // Guardar progreso en Firebase
+    await guardarProgreso();
+
+    document.querySelector(".tarjeta").innerHTML=`
+
+    <h2 style="color:#6D28D9;font-size:38px;">
+
+    ¡Nivel 3 Finalizado!
+
+    </h2>
+
+    <br>
+
+    <h2>Maestro Geométrico</h2>
+
+    <br>
+
+    <h1>${aciertos} / ${preguntas.length}</h1>
+
+    <br>
+
+    <p style="font-size:22px;">
+
+    ⭐ Ganaste <b>${aciertos*30} XP</b>
+
+    </p>
+
+    <br>
+
+    <p style="font-size:22px;">
+
+    $ Monedas obtenidas: <b>${aciertos*10}</b>
+
+    </p>
+
+    <br>
+
+    <button onclick="location.href='niveles.html'"
+    style="padding:15px 40px;
+    border:none;
+    background:#22C55E;
+    color:white;
+    font-size:20px;
+    border-radius:30px;
+    cursor:pointer;">
+
+    Volver a niveles
+
+    </button>
+
+    `;
+
+}
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+import {
+getFirestore,
+doc,
+setDoc,
+increment
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyDW4w9TOyboiDPjvxjiFrExPSjuX18Wshk",
+
+authDomain: "edugame-340db.firebaseapp.com",
+
+projectId: "edugame-340db",
+
+storageBucket: "edugame-340db.firebasestorage.app",
+
+messagingSenderId: "150012921820",
+
+appId: "1:150012921820:web:08a6a4aa18ae5a29ef3119"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const db = getFirestore(app);
+
+async function guardarProgreso(){
+
+const usuario = auth.currentUser;
+
+if(!usuario){
+
+console.log("Usuario no conectado");
+
+return;
+
+}
+
+try{
+
+await setDoc(
+
+doc(db,"usuarios",usuario.uid),
+
+{
+
+xp: increment(aciertos*30),
+
+monedas: increment(aciertos*10),
+
+nivelActual:4,
+
+niveles:{
+
+nivel1:true,
+
+nivel2:true,
+
+nivel3:true,
+
+nivel4:true,
+
+nivel5:false
+
+}
+
+},
+
+{merge:true}
+
+);
+
+console.log("Nivel 3 guardado");
+
+}catch(error){
+
+console.log(error);
+
+}
+
+}
+
+</script>
+
+</body>
+
+</html>

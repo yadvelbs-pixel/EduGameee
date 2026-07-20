@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>EduGame | Nivel 4</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+
+body{
+
+background:linear-gradient(135deg,#ede9fe,#7C3AED,#5B21B6);
+
+min-height:100vh;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+padding:30px;
+
+}
+
+
+
+.contenedor{
+
+width:100%;
+
+max-width:1100px;
+
+background:white;
+
+border-radius:35px;
+
+overflow:hidden;
+
+box-shadow:0 25px 60px rgba(0,0,0,.18);
+
+}
+
+
+
+header{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:25px 40px;
+
+border-bottom:1px solid #ececec;
+
+}
+
+
+
+.logo{
+
+font-size:38px;
+
+font-weight:800;
+
+color:#5B21B6;
+
+}
+
+
+
+.logo span{
+
+color:#22C55E;
+
+}
+
+
+
+.info{
+
+display:flex;
+
+gap:15px;
+
+}
+
+
+
+.item{
+
+background:#F3E8FF;
+
+padding:12px 20px;
+
+border-radius:20px;
+
+font-weight:700;
+
+color:#5B21B6;
+
+}
+
+
+
+main{
+
+padding:40px;
+
+}
+
+
+
+h1{
+
+font-size:34px;
+
+color:#4C1D95;
+
+margin-bottom:10px;
+
+}
+
+
+
+.subtitulo{
+
+color:#666;
+
+margin-bottom:30px;
+
+}
+
+
+
+.barra{
+
+width:100%;
+
+height:18px;
+
+background:#E5E7EB;
+
+border-radius:20px;
+
+overflow:hidden;
+
+margin-bottom:30px;
+
+}
+
+
+
+.progreso{
+
+height:100%;
+
+width:0%;
+
+background:#22C55E;
+
+transition:.4s;
+
+}
+
+
+
+.panel{
+
+display:flex;
+
+gap:40px;
+
+align-items:center;
+
+}
+
+
+
+.izquierda{
+
+flex:1;
+
+}
+
+
+
+.derecha{
+
+width:280px;
+
+text-align:center;
+
+}
+
+
+
+.tarjeta{
+
+background:#F9FAFB;
+
+border-radius:25px;
+
+padding:35px;
+
+box-shadow:0 10px 20px rgba(0,0,0,.05);
+
+}
+
+
+
+.nivel{
+
+display:inline-block;
+
+padding:8px 18px;
+
+border-radius:20px;
+
+background:#7C3AED;
+
+color:white;
+
+font-weight:700;
+
+margin-bottom:20px;
+
+}
+
+
+
+.pregunta{
+
+font-size:24px;
+
+line-height:1.7;
+
+color:#333;
+
+margin-bottom:30px;
+
+}
+
+
+
+input{
+
+width:100%;
+
+padding:18px;
+
+border-radius:18px;
+
+border:2px solid #DDD6FE;
+
+font-size:22px;
+
+outline:none;
+
+text-align:center;
+
+}
+
+
+
+input:focus{
+
+border-color:#7C3AED;
+
+}
+
+
+
+button{
+
+margin-top:25px;
+
+background:#22C55E;
+
+color:white;
+
+border:none;
+
+padding:16px 40px;
+
+font-size:20px;
+
+border-radius:30px;
+
+cursor:pointer;
+
+transition:.3s;
+
+font-weight:700;
+
+}
+
+
+
+button:hover{
+
+transform:scale(1.05);
+
+}
+
+
+
+#rachi{
+
+width:220px;
+
+animation:flotar 3s infinite;
+
+}
+
+
+
+@keyframes flotar{
+
+50%{
+
+transform:translateY(-12px);
+
+}
+
+}
+
+
+
+.cronometro{
+
+margin-top:25px;
+
+font-size:34px;
+
+font-weight:800;
+
+color:#EF4444;
+
+}
+
+
+
+#mensaje{
+
+margin-top:25px;
+
+font-size:22px;
+
+font-weight:700;
+
+}
+
+
+
+#explicacion{
+
+margin-top:25px;
+
+}
+
+
+
+.resultado{
+
+background:#F8FAFC;
+
+padding:25px;
+
+border-radius:20px;
+
+line-height:1.8;
+
+}
+
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="contenedor">
+
+
+<header>
+
+
+<div class="logo">
+
+Edu<span>Game</span>
+
+</div>
+
+
+
+<div class="info">
+
+
+<div class="item" id="xp">
+
+⭐ 0
+
+</div>
+
+
+<div class="item" id="monedas">
+
+$ 0
+
+</div>
+
+
+<div class="item" id="racha">
+
+🔥 0
+
+</div>
+
+
+</div>
+
+
+</header>
+
+
+
+<main>
+
+
+<h1>
+Nivel 4 - Experto en Estadística
+</h1>
+
+
+
+<p class="subtitulo">
+
+Analiza datos, gráficos y medidas estadísticas para superar este desafío.
+
+</p>
+
+
+
+<div class="barra">
+
+
+<div class="progreso" id="progreso"></div>
+
+
+</div>
+
+
+
+<div class="panel">
+
+
+
+<div class="izquierda">
+
+
+<div class="tarjeta">
+
+
+
+<div class="nivel">
+
+Problema <span id="numeroPregunta">1</span> / 20
+
+</div>
+
+
+
+<div class="pregunta" id="pregunta">
+
+Cargando problema...
+
+</div>
+
+
+
+
+<input
+
+type="text"
+
+id="respuesta"
+
+placeholder="Escribe tu respuesta"
+
+>
+
+
+
+
+<button onclick="verificarRespuesta()">
+
+Comprobar respuesta
+
+</button>
+
+
+
+<div id="mensaje"></div>
+
+
+
+<div id="explicacion"></div>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+<div class="derecha">
+
+
+<img
+
+id="rachi"
+
+src="images/cronometra.png"
+
+>
+
+
+
+<div class="cronometro" id="tiempo">
+
+60
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+</main>
+
+
+</div>
+
+<script>
+
+
+// =============================
+// PREGUNTAS NIVEL 4
+// EXPERTO EN ESTADÍSTICA
+// =============================
+
+
+const problemas=[
+
+
+{
+pregunta:"¿Cuál es la media de los datos: 4, 6 y 8?",
+respuesta:"6",
+explicacion:"Media = (4+6+8) ÷ 3 = 6"
+},
+
+
+{
+pregunta:"¿Cuál es la moda de: 2, 3, 3, 5?",
+respuesta:"3",
+explicacion:"La moda es el número que más se repite."
+},
+
+
+{
+pregunta:"Encuentra la mediana: 5, 7, 9",
+respuesta:"7",
+explicacion:"La mediana es el valor central de los datos ordenados."
+},
+
+
+{
+pregunta:"¿Cuál es el rango de: 5, 10, 15?",
+respuesta:"10",
+explicacion:"Rango = mayor - menor = 15 - 5 = 10."
+},
+
+
+{
+pregunta:"Si 10 de 20 estudiantes aprobaron, ¿qué porcentaje representa?",
+respuesta:"50%",
+explicacion:"10 es la mitad de 20, por eso representa el 50%."
+},
+
+
+{
+pregunta:"¿Qué medida indica el valor que más se repite?",
+respuesta:"moda",
+explicacion:"La moda representa el dato con mayor frecuencia."
+},
+
+
+{
+pregunta:"¿Qué medida divide los datos ordenados en dos partes?",
+respuesta:"mediana",
+explicacion:"La mediana separa la mitad inferior y superior."
+},
+
+
+{
+pregunta:"¿Qué gráfico se utiliza para comparar categorías?",
+respuesta:"barras",
+explicacion:"El gráfico de barras permite comparar cantidades."
+},
+
+
+{
+pregunta:"¿Qué representa la frecuencia absoluta?",
+respuesta:"cantidad de veces",
+explicacion:"Indica cuántas veces aparece un dato."
+},
+
+
+{
+pregunta:"Ordena los datos: 8, 2, 5",
+respuesta:"2,5,8",
+explicacion:"Los datos deben ordenarse de menor a mayor."
+},
+
+
+{
+pregunta:"¿Cuál es la media de 10 y 20?",
+respuesta:"15",
+explicacion:"(10+20) ÷ 2 = 15."
+},
+
+
+{
+pregunta:"¿Cuál es el rango de: 12, 20, 30?",
+respuesta:"18",
+explicacion:"30 - 12 = 18."
+},
+
+
+{
+pregunta:"¿Qué gráfico utiliza sectores circulares?",
+respuesta:"circular",
+explicacion:"El gráfico circular muestra proporciones."
+},
+
+
+{
+pregunta:"¿Qué estudia la estadística?",
+respuesta:"datos",
+explicacion:"La estadística analiza y organiza datos."
+},
+
+
+{
+pregunta:"¿Qué es una población estadística?",
+respuesta:"conjunto de elementos",
+explicacion:"Es el grupo total que se desea estudiar."
+},
+
+
+{
+pregunta:"¿Qué es una muestra?",
+respuesta:"parte de la población",
+explicacion:"Es un grupo seleccionado de la población."
+},
+
+
+{
+pregunta:"La probabilidad mide la:",
+respuesta:"posibilidad",
+explicacion:"Indica qué tan posible es que ocurra un evento."
+},
+
+
+{
+pregunta:"Calcula la media: 3, 6 y 9",
+respuesta:"6",
+explicacion:"(3+6+9) ÷ 3 = 6."
+},
+
+
+{
+pregunta:"Si un dato aparece 7 veces, su frecuencia es:",
+respuesta:"7",
+explicacion:"La frecuencia indica la cantidad de apariciones."
+},
+
+
+{
+pregunta:"¿Cuál es la media de 5, 10 y 15?",
+respuesta:"10",
+explicacion:"(5+10+15) ÷ 3 = 10."
+}
+
+
+];
+
+
+
+// =============================
+// VARIABLES
+// =============================
+
+
+let actual=0;
+
+let xp=0;
+
+let monedas=0;
+
+let racha=0;
+
+
+
+// =============================
+// CARGAR PROBLEMA
+// =============================
+
+
+function cargar(){
+
+
+document.getElementById("pregunta").textContent =
+problemas[actual].pregunta;
+
+
+
+document.getElementById("numeroPregunta").textContent =
+actual+1;
+
+
+
+document.getElementById("progreso").style.width =
+((actual+1)/problemas.length)*100+"%";
+
+
+
+document.getElementById("respuesta").value="";
+
+
+document.getElementById("mensaje").textContent="";
+
+
+document.getElementById("explicacion").textContent="";
+
+
+}
+
+
+
+
+// =============================
+// VERIFICAR RESPUESTA
+// =============================
+
+
+function verificarRespuesta(){
+
+
+let respuesta =
+document.getElementById("respuesta")
+.value
+.toLowerCase()
+.trim();
+
+
+
+let correcta =
+problemas[actual].respuesta
+.toLowerCase();
+
+
+
+if(respuesta==correcta){
+
+
+
+xp+=20;
+
+monedas+=10;
+
+racha++;
+
+
+
+document.getElementById("mensaje").innerHTML=
+"¡Correcto!";
+
+
+
+}else{
+
+
+racha=0;
+
+
+
+document.getElementById("mensaje").innerHTML=
+"Incorrecto";
+
+
+
+document.getElementById("explicacion").innerHTML=
+
+"Respuesta correcta: "
++
+problemas[actual].respuesta
++
+"<br>"
++
+problemas[actual].explicacion;
+
+
+}
+
+
+
+
+document.getElementById("xp").innerHTML=
+"⭐ "+xp;
+
+
+
+document.getElementById("monedas").innerHTML=
+"$ "+monedas;
+
+
+
+document.getElementById("racha").innerHTML=
+"🔥 "+racha;
+
+
+
+
+setTimeout(()=>{
+
+
+actual++;
+
+
+
+if(actual<problemas.length){
+
+
+cargar();
+
+
+}else{
+
+
+finalizarNivel4();
+
+
+}
+
+
+},1500);
+
+
+
+}
+
+
+cargar();
+
+
+
+</script>
+
+<script type="module">
+
+
+// =============================
+// TEMPORIZADOR
+// =============================
+
+
+let tiempo = 60;
+
+let reloj = setInterval(()=>{
+
+    tiempo--;
+
+    document.getElementById("tiempo").textContent = tiempo;
+
+
+    if(tiempo <= 0){
+
+        clearInterval(reloj);
+
+        alert(" Tiempo terminado");
+
+        location.reload();
+
+    }
+
+
+},1000);
+
+
+
+
+// =============================
+// FINALIZAR NIVEL 4
+// =============================
+
+
+window.finalizarNivel4 = function(){
+
+clearInterval(reloj);
+
+
+
+// Desbloquear Nivel 5
+
+localStorage.setItem(
+"nivel5Desbloqueado",
+"true"
+);
+
+
+
+// Mostrar resultado
+
+
+document.querySelector(".contenedor").innerHTML=`
+
+<div style="padding:50px;text-align:center">
+
+
+<h1 style="color:#5B21B6">
+
+¡Nivel 4 Finalizado!
+
+</h1>
+
+<h2 style="color:#22C55E">
+
+¡Has superado el desafío de Estadística!
+
+</h2>
+
+
+<br>
+
+
+<h2>
+
+Nivel 4: Experto en Estadística
+
+</h2>
+
+<p style="font-size:18px;color:#666">
+
+Has demostrado tus conocimientos sobre datos,
+gráficos y medidas estadísticas.
+
+</p>
+
+
+<br>
+
+
+<h2 style="color:#22C55E">
+
+⭐ XP obtenida: ${xp}
+
+</h2>
+
+
+<br>
+
+
+<h2 style="color:#F59E0B">
+
+Monedas: ${monedas}
+
+</h2>
+
+
+<br>
+
+
+<h2>
+
+🔥 Racha máxima: ${racha}
+
+</h2>
+
+
+<br>
+
+
+<button onclick="location.href='niveles.html'">
+
+Volver a niveles
+
+</button>
+
+
+</div>
+
+
+`;
+
+
+
+guardarProgreso();
+
+}
+
+
+
+
+// =============================
+// FIREBASE
+// =============================
+
+
+import {
+
+initializeApp
+
+}
+
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+
+
+import {
+
+getAuth
+
+}
+
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+
+
+import {
+
+getFirestore,
+
+doc,
+
+setDoc,
+
+increment
+
+}
+
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+
+
+
+const firebaseConfig = {
+
+
+apiKey: "AIzaSyDW4w9TOyboiDPjvxjiFrExPSjuX18Wshk",
+
+
+authDomain: "edugame-340db.firebaseapp.com",
+
+
+projectId: "edugame-340db",
+
+
+storageBucket: "edugame-340db.firebasestorage.app",
+
+
+messagingSenderId: "150012921820",
+
+
+appId: "1:150012921820:web:08a6a4aa18ae5a29ef3119"
+
+
+};
+
+
+
+
+
+const app = initializeApp(firebaseConfig);
+
+
+const auth = getAuth(app);
+
+
+const db = getFirestore(app);
+
+
+
+
+
+async function guardarProgreso(){
+
+
+
+const usuario = auth.currentUser;
+
+
+
+if(!usuario){
+
+
+console.log("Usuario no conectado");
+
+
+return;
+
+
+}
+
+
+
+
+try{
+
+
+await setDoc(
+
+doc(db,"usuarios",usuario.uid),
+
+{
+
+xp:increment(xp),
+
+monedas:increment(monedas),
+
+nivelActual:4,
+
+nivelDesbloqueado:5,
+
+niveles:{
+
+nivel1:true,
+nivel2:true,
+nivel3:true,
+nivel4:true
+
+}
+
+},
+
+{merge:true}
+
+);
+
+
+console.log(
+"Nivel 4 guardado correctamente"
+);
+
+
+
+}catch(error){
+
+
+console.error(
+"Error guardando progreso:",
+error
+);
+
+
+}
+
+
+
+
+}
+
+
+
+</script>
+
+</body>
+</html>

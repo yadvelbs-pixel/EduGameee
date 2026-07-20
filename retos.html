@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>EduGame | Retos</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+
+body{
+
+background:linear-gradient(135deg,#e4d4ff,#5B21B6,#8B5CF6);
+padding:30px;
+
+}
+
+
+.contenedor{
+
+max-width:1100px;
+margin:auto;
+background:white;
+border-radius:35px;
+padding:40px;
+
+box-shadow:0 20px 50px rgba(0,0,0,.2);
+
+}
+
+
+header{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+margin-bottom:30px;
+
+}
+
+.logo {
+
+font-size:38px;
+
+color:#5B21B6;
+
+font-weight:800;
+
+letter-spacing:-1px;
+}
+
+
+.logo span{
+
+color:#22C55E;
+
+font-weight:800;
+
+}
+
+
+.stats{
+
+display:flex;
+gap:15px;
+
+}
+
+
+.stat{
+
+background:#F3E8FF;
+padding:12px 20px;
+border-radius:20px;
+color:#5B21B6;
+font-weight:bold;
+
+}
+
+
+
+h1{
+
+text-align:center;
+color:#3b0764;
+margin-bottom:30px;
+
+}
+
+
+
+.racha{
+
+display:block;
+margin:auto;
+width:180px;
+
+}
+
+
+
+.retos{
+
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:25px;
+
+}
+
+
+
+.reto{
+
+background:#faf5ff;
+border-radius:25px;
+padding:25px;
+
+border:2px solid #eee;
+
+}
+
+
+
+.reto h2{
+
+color:#7C3AED;
+
+}
+
+
+.reto p{
+
+margin:15px 0;
+color:#555;
+
+}
+
+
+
+input{
+
+width:100%;
+padding:12px;
+
+border-radius:15px;
+border:2px solid #ddd;
+
+font-size:18px;
+
+}
+
+
+
+button{
+
+margin-top:15px;
+
+background:#22C55E;
+
+border:none;
+
+color:white;
+
+padding:12px 30px;
+
+border-radius:25px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+}
+
+
+button:hover{
+
+transform:scale(1.05);
+
+}
+
+
+.resultado{
+
+margin-top:15px;
+
+font-weight:bold;
+
+}
+
+
+
+@media(max-width:800px){
+
+.retos{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+
+</style>
+
+
+</head>
+
+
+<body>
+
+
+<div class="contenedor">
+
+
+<header>
+
+
+<div class="logo">
+
+Edu<span>Game</span>
+
+</div>
+
+
+<div class="stats">
+
+
+<div class="stat" id="xp">
+
+⭐ 0 XP
+
+</div>
+
+
+<div class="stat" id="monedas">
+
+$ 0
+
+</div>
+
+
+</div>
+
+
+</header>
+
+
+
+<h1>
+Retos Matemáticos
+</h1>
+
+
+<img class="racha" id="rachita" src="images/rachie.png">
+
+
+
+<div class="retos">
+
+
+
+<div class="reto">
+
+
+<h2>Reto 1</h2>
+
+
+<p>
+María tiene 8 caramelos y su mamá le regala 7 más.
+¿Cuántos caramelos tiene ahora?
+</p>
+
+
+<input id="respuesta1" type="number" placeholder="Escribe tu respuesta">
+
+
+<button onclick="comprobar(1,15)">
+Comprobar
+</button>
+
+
+<p class="resultado" id="resultado1"></p>
+
+
+</div>
+
+
+
+
+<div class="reto">
+
+
+<h2>Reto 2</h2>
+
+
+<p>
+Una biblioteca tiene 245 libros y presta 87 libros a los estudiantes.
+¿Cuántos libros quedan?
+</p>
+
+
+<input id="respuesta2" type="number" placeholder="Escribe tu respuesta">
+
+
+<button onclick="comprobar(2,158)">
+Comprobar
+</button>
+
+
+<p class="resultado" id="resultado2"></p>
+
+
+</div>
+
+
+
+
+
+<div class="reto">
+
+
+<h2>Reto 3</h2>
+
+
+<p>
+Un colegio compra 6 cajas con 24 cuadernos cada una.
+¿Cuántos cuadernos compró en total?
+</p>
+
+
+<input id="respuesta3" type="number" placeholder="Escribe tu respuesta">
+
+
+<button onclick="comprobar(3,144)">
+Comprobar
+</button>
+
+
+<p class="resultado" id="resultado3"></p>
+
+
+</div>
+
+
+<div class="reto">
+
+
+<h2>Reto 4</h2>
+
+
+<p>
+Resuelve:
+
+3x + 7 = 28
+
+¿Cuál es el valor de x?
+</p>
+
+
+<input id="respuesta4" type="number" placeholder="Escribe tu respuesta">
+
+
+<button onclick="comprobar(4,7)">
+Comprobar
+</button>
+
+
+<p class="resultado" id="resultado4"></p>
+
+
+</div>
+
+
+<div class="reto">
+
+
+<h2>Reto 5</h2>
+
+
+<p>
+Una camiseta cuesta S/80 y tiene un descuento del 25%.
+¿Cuánto pagarás finalmente?
+</p>
+
+
+<input id="respuesta5" type="number" placeholder="Escribe tu respuesta">
+
+
+<button onclick="comprobar(5,60)">
+Comprobar
+</button>
+
+
+<p class="resultado" id="resultado5"></p>
+
+
+</div>
+
+<div class="reto">
+
+<h2>Reto 6</h2>
+
+<p>
+
+Una empresa fabrica 480 botellas de agua al día. El lunes vendió el 35% de su producción, el martes vendió el 40% del resto y el miércoles vendió 96 botellas.
+
+¿Cuántas botellas quedaron sin vender al finalizar el miércoles?
+
+</p>
+
+<input id="respuesta6" type="number" placeholder="Escribe tu respuesta">
+
+<button onclick="comprobar(6,125)">
+Comprobar
+</button>
+
+<p class="resultado" id="resultado6"></p>
+
+</div>
+
+<div class="reto">
+
+<h2>Reto 7</h2>
+
+<p>
+
+Un terreno rectangular tiene un área de 432 m². Si el largo mide 27 metros, ¿cuánto mide el perímetro del terreno?
+
+</p>
+
+<input id="respuesta7" type="number" placeholder="Escribe tu respuesta">
+
+<button onclick="comprobar(7,70)">
+Comprobar
+</button>
+
+<p class="resultado" id="resultado7"></p>
+
+</div>
+
+<div class="reto">
+
+<h2>Reto 8</h2>
+
+<p>
+
+Una tienda compra 240 cuadernos a S/12 cada uno. Luego vende el 75% de ellos a S/18 por cuaderno y el resto a S/15 por cuaderno.
+
+¿Cuál fue la ganancia total obtenida?
+
+</p>
+
+<input id="respuesta8" type="number" placeholder="Escribe tu respuesta">
+
+<button onclick="comprobar(8,1260)">
+Comprobar
+</button>
+
+<p class="resultado" id="resultado8"></p>
+
+</div>
+
+</div>
+
+
+</div>
+
+
+
+<script>
+
+
+let experiencia=0;
+
+let monedas=0;
+
+
+
+function comprobar(numero,respuestaCorrecta){
+
+
+let respuesta=document.getElementById("respuesta"+numero).value;
+
+
+let resultado=document.getElementById("resultado"+numero);
+
+
+let racha=document.getElementById("rachita");
+
+
+
+if(Number(respuesta)===respuestaCorrecta){
+
+
+resultado.innerHTML="¡Correcto! +10 XP +5 monedas";
+
+resultado.style.color="green";
+
+
+experiencia+=10;
+
+monedas+=5;
+
+
+document.getElementById("xp").innerHTML="⭐ "+experiencia+" XP";
+
+
+document.getElementById("monedas").innerHTML="$ "+monedas;
+
+
+
+racha.src="images/rachita_feliz.png";
+
+
+
+}else{
+
+
+resultado.innerHTML="Incorrecto, intenta nuevamente";
+
+resultado.style.color="red";
+
+
+racha.src="images/rachita_triste.png";
+
+
+}
+
+
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>

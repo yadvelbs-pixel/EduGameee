@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>EduGame | Nivel 5 - Leyenda Matemática</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+
+min-height:100vh;
+
+overflow-x:hidden;
+
+background:
+linear-gradient(
+180deg,
+#05011c,
+#140044,
+#2b0077,
+#120033
+);
+
+color:#fff;
+
+}
+
+/* ===== ESTRELLAS ===== */
+
+.star{
+
+position:fixed;
+
+width:4px;
+
+height:4px;
+
+background:white;
+
+border-radius:50%;
+
+animation:brillo 3s infinite;
+
+}
+
+@keyframes brillo{
+
+0%,100%{
+
+opacity:.2;
+transform:scale(.5);
+
+}
+
+50%{
+
+opacity:1;
+transform:scale(1.5);
+
+}
+
+}
+
+/* ===== CONTENEDOR ===== */
+
+.game{
+
+width:100%;
+
+min-height:100vh;
+
+padding:20px;
+
+position:relative;
+
+}
+
+/* ===== CABECERA ===== */
+
+.top{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:15px 25px;
+
+background:rgba(255,255,255,.12);
+
+border-radius:25px;
+
+backdrop-filter:blur(12px);
+
+box-shadow:0 0 20px rgba(255,255,255,.15);
+
+}
+
+.stats{
+
+display:flex;
+
+gap:20px;
+
+}
+
+.stat{
+
+padding:10px 18px;
+
+background:#ffffff18;
+
+border-radius:20px;
+
+font-weight:700;
+
+font-size:18px;
+
+}
+
+/* ===== TITULO ===== */
+
+.title{
+
+text-align:center;
+
+margin:30px 0;
+
+}
+
+.title h1{
+
+font-size:48px;
+
+color:#FFD700;
+
+text-shadow:0 0 18px gold;
+
+}
+
+.title p{
+
+margin-top:10px;
+
+font-size:18px;
+
+color:#ddd;
+
+}
+
+/* ===== AREA PRINCIPAL ===== */
+
+.main{
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+gap:40px;
+
+margin-top:20px;
+
+}
+
+/* ===== MASCOTA ===== */
+
+.mascot{
+
+width:300px;
+
+animation:flotar 3s ease-in-out infinite;
+
+user-select:none;
+
+}
+
+@keyframes flotar{
+
+0%,100%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(-18px);
+
+}
+
+}
+
+/* ===== PANEL ===== */
+
+.play{
+
+width:680px;
+
+max-width:100%;
+
+background:rgba(255,255,255,.12);
+
+padding:30px;
+
+border-radius:35px;
+
+backdrop-filter:blur(10px);
+
+box-shadow:0 0 35px rgba(0,0,0,.35);
+
+}
+
+/* ===== CRONÓMETRO ===== */
+
+.timer{
+
+width:120px;
+
+height:120px;
+
+margin:auto;
+
+border-radius:50%;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+font-size:36px;
+
+font-weight:800;
+
+border:8px solid #fff;
+
+background:
+conic-gradient(
+#0004ff 0deg,
+rgba(255,255,255,.2) 0deg
+);
+
+transition:.3s;
+
+}
+
+
+/* ===== BARRA ===== */
+
+.progress-box{
+
+margin:25px 0;
+
+}
+
+.progress-bar{
+
+height:20px;
+
+background:#ffffff30;
+
+border-radius:20px;
+
+overflow:hidden;
+
+}
+
+.progress{
+
+height:100%;
+
+width:0%;
+
+background:
+
+linear-gradient(
+90deg,
+#00ffff,
+#00ff88
+);
+
+transition:.5s;
+
+}
+
+
+/* ===== PREGUNTA ===== */
+
+.question{
+
+background:white;
+
+color:#222;
+
+padding:25px;
+
+border-radius:25px;
+
+font-size:22px;
+
+font-weight:700;
+
+text-align:center;
+
+margin-bottom:25px;
+
+min-height:120px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+}
+
+
+/* ===== RESPUESTAS ===== */
+
+.answers{
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:18px;
+
+}
+
+.answer{
+
+padding:18px;
+
+border:none;
+
+border-radius:20px;
+
+cursor:pointer;
+
+font-size:18px;
+
+font-weight:700;
+
+background:
+
+linear-gradient(
+135deg,
+#ffffff,
+#ddddff
+);
+
+transition:.25s;
+
+}
+
+.answer:hover{
+
+transform:scale(1.04);
+
+box-shadow:0 0 20px rgb(0, 38, 255);
+
+}
+
+.answer.correcta{
+
+background:#00d26a !important;
+
+color:white;
+
+}
+
+.answer.incorrecta{
+
+background:#ff3f3f !important;
+
+color:white;
+
+}
+
+
+/* ===== BOTÓN ===== */
+
+.btn{
+
+margin-top:25px;
+
+width:100%;
+
+padding:16px;
+
+border:none;
+
+border-radius:20px;
+
+cursor:pointer;
+
+font-size:20px;
+
+font-weight:800;
+
+background:
+
+linear-gradient(
+90deg,
+#FFD700,
+#ff9900
+);
+
+transition:.3s;
+
+}
+
+.btn:hover{
+
+transform:scale(1.03);
+
+}
+
+
+/* ===== FINAL ===== */
+
+.finish{
+
+display:none;
+
+position:fixed;
+
+inset:0;
+
+background:rgba(0,0,0,.88);
+
+justify-content:center;
+
+align-items:center;
+
+z-index:100;
+
+}
+
+.finish-box{
+
+width:90%;
+
+max-width:500px;
+
+background:white;
+
+color:#222;
+
+padding:40px;
+
+border-radius:35px;
+
+text-align:center;
+
+}
+
+.finish-box h2{
+
+font-size:42px;
+
+color:#6a00ff;
+
+margin-bottom:15px;
+
+}
+
+.finish-box p{
+
+font-size:18px;
+
+margin-bottom:20px;
+
+}
+
+/* =====================================
+   CERTIFICADO
+===================================== */
+
+
+.certificate{
+
+display:none;
+
+position:fixed;
+
+inset:0;
+
+background:rgba(0,0,0,.85);
+
+justify-content:center;
+
+align-items:center;
+
+z-index:200;
+
+}
+
+
+.certificate-box{
+
+width:90%;
+
+max-width:600px;
+
+padding:40px;
+
+background:
+
+linear-gradient(
+135deg,
+#fff7b2,
+#ffffff,
+#ffe066
+);
+
+color:#222;
+
+border-radius:35px;
+
+text-align:center;
+
+box-shadow:
+
+0 0 40px gold;
+
+border:8px solid #FFD700;
+
+}
+
+
+.certificate-box h1{
+
+font-size:45px;
+
+color:#6a00ff;
+
+text-shadow:0 0 15px gold;
+
+}
+
+
+.certificate-box h2{
+
+font-size:28px;
+
+margin:15px;
+
+color:#ff9900;
+
+}
+
+
+.certificate-box h3{
+
+font-size:35px;
+
+margin:20px;
+
+color:#222;
+
+}
+
+
+.datos-certificado{
+
+background:#ffffffaa;
+
+padding:20px;
+
+border-radius:20px;
+
+margin:20px 0;
+
+font-size:20px;
+
+}
+
+.mensaje-logro{
+
+margin:25px 0;
+
+padding:20px;
+
+background:
+
+rgba(106,0,255,.12);
+
+border-radius:20px;
+
+font-size:18px;
+
+font-weight:600;
+
+line-height:1.6;
+
+color:#333;
+
+border:2px dashed #6a00ff;
+
+}
+
+
+/* ===== RESPONSIVE ===== */
+
+@media(max-width:900px){
+
+.main{
+
+flex-direction:column;
+
+}
+
+.mascot{
+
+width:190px;
+
+}
+
+.answers{
+
+grid-template-columns:1fr;
+
+}
+
+.title h1{
+
+font-size:34px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="star" style="top:10%;left:20%"></div>
+<div class="star" style="top:20%;left:60%"></div>
+<div class="star" style="top:40%;left:80%"></div>
+<div class="star" style="top:70%;left:30%"></div>
+<div class="star" style="top:85%;left:90%"></div>
+
+<div class="game">
+
+<header class="top">
+
+<div class="stats">
+
+<div class="stat">
+⭐ XP:
+<span id="xp">0</span>
+</div>
+
+<div class="stat">
+Monedas:
+<span id="coins">0</span>
+</div>
+
+</div>
+
+<div class="stat">
+
+🏆 NIVEL 5
+
+</div>
+
+</header>
+
+<section class="title">
+
+<h1>
+
+LEYENDA MATEMÁTICA
+
+</h1>
+
+<p>
+
+El desafío final de EduGame
+
+</p>
+
+</section>
+
+<section class="main">
+
+<img
+src="images/leyenda.png"
+class="mascot"
+id="mascot">
+
+<div class="play">
+
+  <!-- CRONÓMETRO -->
+
+<div class="timer" id="timer">
+
+60
+
+</div>
+
+
+<!-- BARRA DE PROGRESO -->
+
+<div class="progress-box">
+
+<div class="progress-bar">
+
+<div class="progress" id="progress"></div>
+
+</div>
+
+</div>
+
+
+<!-- PREGUNTA -->
+
+<div class="question" id="question">
+
+Preparando desafío...
+
+</div>
+
+
+<!-- RESPUESTAS -->
+
+<div class="answers" id="answers">
+
+</div>
+
+
+<!-- BOTÓN -->
+
+<button class="btn" id="next">
+
+Siguiente desafío ➜
+
+</button>
+
+</div>
+
+</section>
+
+</div>
+
+
+
+<!-- PANTALLA FINAL -->
+
+<div class="finish" id="finish">
+
+<div class="finish-box">
+
+<h2>
+
+¡FELICIDADES!
+
+</h2>
+
+<p>
+
+Has completado el Nivel 5.
+
+Ahora eres una verdadera
+
+<b>Leyenda Matemática.</b>
+
+</p>
+
+<p>
+
+⭐ XP obtenida:
+<b id="xpFinal">0</b>
+
+</p>
+
+<p>
+
+Monedas ganadas:
+<b id="coinsFinal">0</b>
+
+</p>
+
+<button class="btn" id="certificateBtn">
+
+Ver Certificado
+
+</button>
+
+<button class="btn" id="homeBtn">
+
+Volver al inicio
+
+</button>
+
+</div>
+
+</div>
+
+<!-- =====================================
+     CERTIFICADO VISUAL
+===================================== -->
+
+<div class="certificate" id="certificate">
+
+
+<div class="certificate-box">
+
+
+<h1>
+CERTIFICADO
+</h1>
+
+
+<h2>
+LEYENDA MATEMÁTICA
+</h2>
+
+
+<p>
+Se reconoce a:
+</p>
+
+
+<h3 id="nombreCertificado">
+Jugador EDUGAME
+</h3>
+
+
+<p>
+Por completar exitosamente el
+<br>
+<b>Nivel 5 - Leyenda Matemática</b>
+</p>
+
+
+<div class="mensaje-logro">
+
+¡FELICIDADES!
+
+<br><br>
+
+Has demostrado esfuerzo,
+dedicación y habilidad matemática.
+
+<br>
+
+Superaste el desafío final de EduGame
+y ahora formas parte de los grandes
+<b>Maestros Matemáticos.</b>
+
+<br><br>
+
+¡Sigue aprendiendo y conquistando
+nuevos niveles! 
+
+</div>
+
+<div class="datos-certificado">
+
+
+<p>
+⭐ XP:
+<b id="certXP">0</b>
+</p>
+
+
+<p>
+Monedas:
+<b id="certCoins">0</b>
+</p>
+
+
+<p>
+Fecha:
+<b id="certFecha"></b>
+</p>
+
+
+</div>
+
+
+<button class="btn" id="cerrarCertificado">
+
+Cerrar
+
+</button>
+
+
+</div>
+
+
+</div>
+
+<script>
+
+  // =====================================
+// VARIABLES DEL JUEGO
+// =====================================
+
+let preguntaActual = 0;
+let xp = 0;
+let monedas = 0;
+let tiempo = 60;
+let respondio = false;
+let cronometro = null;
+
+
+// =====================================
+// ELEMENTOS HTML
+// =====================================
+
+const preguntaTexto = document.getElementById("question");
+const respuestas = document.getElementById("answers");
+const botonSiguiente = document.getElementById("next");
+
+const barra = document.getElementById("progress");
+const reloj = document.getElementById("timer");
+
+const xpTexto = document.getElementById("xp");
+const monedasTexto = document.getElementById("coins");
+
+const xpFinal = document.getElementById("xpFinal");
+const coinsFinal = document.getElementById("coinsFinal");
+
+const finish = document.getElementById("finish");
+
+
+// =====================================
+// PREGUNTAS
+// =====================================
+
+const preguntas = [
+    {
+        pregunta: "¿Cuál es el resultado de 7 x 8?",
+        opciones: ["54", "56", "64", "72"],
+        correcta: 1
+    },
+    {
+        pregunta: "Si un triángulo tiene ángulos de 50° y 60°, ¿cuál es el tercer ángulo?",
+        opciones: ["70°", "80°", "90°", "100°"],
+        correcta: 0
+    },
+    {
+        pregunta: "¿Cuál es la raíz cuadrada de 144?",
+        opciones: ["10", "11", "12", "13"],
+        correcta: 2
+    },
+    {
+        pregunta: "Si compras 3 lápices a $2 cada uno, ¿cuánto gastas en total?",
+        opciones: ["$4", "$5", "$6", "$7"],
+        correcta: 2
+    },
+    {
+        pregunta: "¿Cuál es el valor de π (pi) aproximado a dos decimales?",
+        opciones: ["3.12", "3.14", "3.16", "3.18"],
+        correcta: 1
+    }
+];
+
+function mostrarPregunta(){
+
+    respondio = false;
+
+    clearInterval(cronometro);
+
+    tiempo = 60;
+
+    reloj.textContent = tiempo;
+
+    let pregunta = preguntas[preguntaActual];
+
+    preguntaTexto.innerHTML = `
+    <b>Pregunta ${preguntaActual + 1} de ${preguntas.length}</b>
+    <br><br>
+    ${pregunta.pregunta}
+    `;
+
+    respuestas.innerHTML = "";
+
+    pregunta.opciones.forEach((opcion,index)=>{
+
+        const boton = document.createElement("button");
+
+        boton.className = "answer";
+
+        boton.textContent = opcion;
+
+        boton.addEventListener("click",()=>{
+
+            verificarRespuesta(index);
+
+        });
+
+        respuestas.appendChild(boton);
+
+    });
+
+    actualizarBarra();
+
+    iniciarCronometro();
+
+}
+
+
+
+// =====================================
+// VERIFICAR RESPUESTA
+// =====================================
+
+function verificarRespuesta(indice){
+
+    if(respondio) return;
+
+    respondio = true;
+
+    clearInterval(cronometro);
+
+    const botones = document.querySelectorAll(".answer");
+
+    const correcta = preguntas[preguntaActual].correcta;
+
+    botones.forEach((boton,i)=>{
+
+        boton.disabled = true;
+
+        if(i===correcta){
+
+            boton.classList.add("correcta");
+
+        }
+
+    });
+
+    if(indice===correcta){
+
+        xp += 100;
+
+        monedas += 25;
+
+    }else{
+
+        botones[indice].classList.add("incorrecta");
+
+        xp += 20;
+
+    }
+
+    xpTexto.textContent = xp;
+
+    monedasTexto.textContent = monedas;
+
+}
+
+
+
+// =====================================
+// BARRA DE PROGRESO
+// =====================================
+
+function actualizarBarra(){
+
+    const porcentaje =
+    ((preguntaActual) / preguntas.length) * 100;
+
+    barra.style.width = porcentaje + "%";
+
+}
+
+// =====================================
+// CRONÓMETRO
+// =====================================
+
+function iniciarCronometro(){
+
+    clearInterval(cronometro);
+
+    tiempo = 60;
+
+    reloj.textContent = tiempo;
+
+    cronometro = setInterval(()=>{
+
+        tiempo--;
+
+        reloj.textContent = tiempo;
+
+        // Actualizar círculo del cronómetro
+        const grados = (tiempo / 60) * 360;
+
+        reloj.style.background =
+        `conic-gradient(
+            #00ffff ${grados}deg,
+            rgba(255,255,255,.2) ${grados}deg
+        )`;
+
+        if(tiempo <= 0){
+
+            clearInterval(cronometro);
+
+            siguientePregunta();
+
+        }
+
+    },1000);
+
+}
+
+
+
+// =====================================
+// SIGUIENTE PREGUNTA
+// =====================================
+
+function siguientePregunta(){
+
+    preguntaActual++;
+
+    if(preguntaActual >= preguntas.length){
+
+        terminarJuego();
+
+        return;
+
+    }
+
+    mostrarPregunta();
+
+}
+
+
+
+// =====================================
+// BOTÓN SIGUIENTE
+// =====================================
+
+botonSiguiente.addEventListener("click",()=>{
+
+    if(!respondio){
+
+        EduGame("Primero responde la pregunta.");
+
+        return;
+
+    }
+
+    siguientePregunta();
+
+});
+
+
+
+// =====================================
+// FINAL DEL JUEGO
+// =====================================
+
+function terminarJuego(){
+
+    clearInterval(cronometro);
+
+    barra.style.width="100%";
+
+    xpFinal.textContent = xp;
+
+    coinsFinal.textContent = monedas;
+
+    finish.style.display="flex";
+
+}
+
+// =====================================
+// VOLVER AL INICIO
+// =====================================
+
+document
+.getElementById("homeBtn")
+.addEventListener("click",()=>{
+
+    window.location.href="inicio.html";
+
+});
+
+// =====================================
+// INICIAR
+// =====================================
+
+mostrarPregunta();
+
+</script>
+
+<!-- =====================================
+     FIREBASE
+===================================== -->
+
+<script type="module">
+
+import { initializeApp } from 
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import { 
+getFirestore,
+doc,
+setDoc,
+getDoc
+} from 
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+// =====================================
+// CONFIGURACIÓN FIREBASE EDUGAME
+// =====================================
+
+const firebaseConfig = {
+
+    apiKey: "AIzaSyDW4w9TOyboiDPjvxjiFrExPSjuX18Wshk",
+
+    authDomain: "edugame-340db.firebaseapp.com",
+
+    projectId: "edugame-340db",
+
+    storageBucket: "edugame-340db.firebasestorage.app",
+
+    messagingSenderId: "150012921820",
+
+    appId: "1:150012921820:web:08a6a4aa18ae5a29ef3119"
+
+};
+
+// INICIAR FIREBASE
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+// =====================================
+// ELEMENTOS CERTIFICADO
+// =====================================
+
+const certificado = document.getElementById("certificate");
+
+const cerrarCertificado =
+document.getElementById("cerrarCertificado");
+
+const certXP =
+document.getElementById("certXP");
+
+const certCoins =
+document.getElementById("certCoins");
+
+const certFecha =
+document.getElementById("certFecha");
+
+// =====================================
+// CERTIFICADO FIREBASE
+// =====================================
+
+// =====================================
+// MOSTRAR CERTIFICADO
+// =====================================
+
+document
+.getElementById("certificateBtn")
+.addEventListener("click",()=>{
+
+
+    certXP.textContent = xp;
+
+    certCoins.textContent = monedas;
+
+
+    const fecha = new Date();
+
+
+    certFecha.textContent =
+    fecha.toLocaleDateString();
+
+
+    certificado.style.display="flex";
+
+
+    guardarCertificado();
+
+
+});
+
+// =====================================
+// CERRAR CERTIFICADO
+// =====================================
+
+cerrarCertificado
+.addEventListener("click",()=>{
+
+    certificado.style.display="none";
+
+});
+
+
+// GUARDAR CERTIFICADO
+
+async function guardarCertificado(){
+
+    const usuario = "jugador1";
+
+
+    await setDoc(
+
+        doc(db,"certificados",usuario),
+
+        {
+
+            nombre:"Jugador EDUGAME",
+
+            nivel:5,
+
+            xpFinal:xp,
+
+            monedasFinal:monedas,
+
+            fecha:new Date()
+
+        }
+
+    );
+
+
+    EduGame(
+    "Certificado guardado correctamente"
+    );
+
+
+}
+
+/* =====================================
+   GUARDAR PROGRESO
+===================================== */
+
+
+async function guardarProgreso(){
+
+    const usuario = "jugador1";
+
+
+    await setDoc(
+        doc(db,"usuarios",usuario),
+        {
+
+            nivel:5,
+
+            xp:xp,
+
+            monedas:monedas,
+
+            fecha:new Date()
+
+        }
+    );
+
+
+    console.log("Progreso guardado correctamente");
+
+}
+
+
+
+/* =====================================
+   CARGAR PROGRESO
+===================================== */
+
+
+async function cargarProgreso(){
+
+    const usuario="jugador1";
+
+
+    const datos =
+    await getDoc(
+        doc(db,"usuarios",usuario)
+    );
+
+
+    if(datos.exists()){
+
+
+        xp =
+        datos.data().xp || 0;
+
+
+        monedas =
+        datos.data().monedas || 0;
+
+
+        console.log(
+        "Datos cargados:",
+        datos.data()
+        );
+
+
+    }
+
+}
+
+
+
+cargarProgreso();
+
+
+
+/* =====================================
+   GUARDAR AL TERMINAR NIVEL
+===================================== */
+
+
+const finalizarOriginal = terminarJuego;
+
+
+terminarJuego = function(){
+
+    finalizarOriginal();
+
+    guardarProgreso();
+
+};
+
+
+
+</script>
+
+</body>
+</html>

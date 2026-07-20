@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>EduGame | Niveles</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+
+body{
+
+background:linear-gradient(135deg,#e4d4ff,#5B21B6,#8B5CF6);
+
+min-height:100vh;
+
+padding:25px;
+
+}
+
+
+
+.contenedor{
+
+max-width:1200px;
+
+margin:auto;
+
+background:white;
+
+border-radius:35px;
+
+padding:45px;
+
+box-shadow:0 20px 50px rgba(0,0,0,.15);
+
+}
+
+
+
+h1{
+
+text-align:center;
+
+font-size:45px;
+
+color:#5B21B6;
+
+}
+
+
+
+.descripcion{
+
+text-align:center;
+
+color:#666;
+
+margin:15px 0 40px;
+
+}
+
+
+
+.niveles{
+
+display:grid;
+
+grid-template-columns:repeat(3,1fr);
+
+gap:25px;
+
+}
+
+
+
+.nivel{
+
+background:#faf5ff;
+
+border-radius:25px;
+
+padding:30px;
+
+text-align:center;
+
+border:2px solid #eee;
+
+transition:.3s;
+
+}
+
+
+
+.nivel:hover{
+
+transform:translateY(-8px);
+
+border-color:#7C3AED;
+
+}
+
+
+
+.icono{
+
+font-size:55px;
+
+}
+
+
+
+.nivel h2{
+
+color:#5B21B6;
+
+margin:15px 0;
+
+}
+
+
+
+.nivel p{
+
+color:#666;
+
+}
+
+
+
+.recompensa{
+
+margin:20px 0;
+
+color:#7C3AED;
+
+font-weight:700;
+
+}
+
+
+
+.boton{
+
+display:inline-block;
+
+background:#22C55E;
+
+color:white;
+
+padding:12px 35px;
+
+border-radius:30px;
+
+text-decoration:none;
+
+font-weight:700;
+
+}
+
+
+
+.bloqueado{
+
+opacity:.6;
+
+}
+
+
+
+.volver{
+
+display:block;
+
+text-align:center;
+
+margin-top:35px;
+
+text-decoration:none;
+
+color:#5B21B6;
+
+font-weight:700;
+
+}
+
+
+
+@media(max-width:900px){
+
+.niveles{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="contenedor">
+
+
+<h1> Mundos Matemáticos</h1>
+
+
+<p class="descripcion">
+Completa cada nivel y conviértete en un maestro de las matemáticas
+</p>
+
+
+
+<div class="niveles">
+
+
+
+<div class="nivel">
+
+<div class="icono">
+
+</div>
+
+<h2>Nivel 1</h2>
+
+<p>
+Explorador Matemático
+</p>
+
+<div class="recompensa">
+⭐ 100 XP
+</div>
+
+<a href="nivel1.html" class="boton">
+Comenzar
+</a>
+
+</div>
+
+
+<div class="nivel bloqueado" id="nivel2">
+
+<div class="icono">
+
+</div>
+
+<h2>Nivel 2</h2>
+
+<p>
+Desafío Algebraico
+</p>
+
+<div class="recompensa">
+⭐ 200 XP
+</div>
+
+<a href="#" class="boton">
+Bloqueado
+</a>
+
+</div>
+
+<div class="nivel bloqueado" id="nivel3">
+
+<h2>Nivel 3</h2>
+
+<p>
+Maestro Geométrico
+</p>
+
+<div class="recompensa">
+⭐ 300 XP
+</div>
+
+<a href="#" class="boton">
+Bloqueado
+</a>
+</div>
+
+<div class="nivel bloqueado" id="nivel4">
+
+<div class="icono"></div>
+
+<h2>Nivel 4</h2>
+
+<p>
+Experto en Estadística
+</p>
+
+<div class="recompensa">
+⭐ 400 XP
+</div>
+
+<a href="#" class="boton">
+Bloqueado
+</a>
+
+</div>
+
+
+<div class="nivel bloqueado" id="nivel5">
+
+<div class="icono">
+</div>
+
+<h2>Nivel 5</h2>
+
+<p>
+Leyenda Matemática
+</p>
+
+<div class="recompensa">
+⭐ 500 XP
+</div>
+
+<a href="#" class="boton">
+Bloqueado
+</a>
+
+</div>
+
+</div>
+<a href="inicio.html" class="volver">
+⬅ Volver al inicio
+</a>
+
+
+</div>
+<script type="module">
+
+import { initializeApp } 
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+
+import { 
+getAuth,
+onAuthStateChanged
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+
+import {
+getFirestore,
+doc,
+getDoc
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyDW4w9TOyboiDPjvxjiFrExPSjuX18Wshk",
+
+authDomain: "edugame-340db.firebaseapp.com",
+
+projectId: "edugame-340db",
+
+storageBucket: "edugame-340db.firebasestorage.app",
+
+messagingSenderId: "150012921820",
+
+appId: "1:150012921820:web:08a6a4aa18ae5a29ef3119"
+
+};
+
+
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const db = getFirestore(app);
+
+
+
+
+
+onAuthStateChanged(auth, async(usuario)=>{
+
+
+if(usuario){
+
+
+const referencia = doc(db,"usuarios",usuario.uid);
+
+
+const datos = await getDoc(referencia);
+
+
+
+if(datos.exists()){
+
+
+let niveles = datos.data().niveles;
+
+
+
+// DESBLOQUEAR NIVEL 2
+
+if(niveles.nivel2){
+
+
+let tarjeta2=document.getElementById("nivel2");
+
+
+tarjeta2.classList.remove("bloqueado");
+
+
+let boton2=tarjeta2.querySelector(".boton");
+
+
+boton2.textContent="Comenzar";
+
+
+boton2.href="nivel2.html";
+
+
+}
+
+
+
+
+// DESBLOQUEAR NIVEL 3
+
+if(niveles.nivel3){
+
+
+let tarjeta3=document.getElementById("nivel3");
+
+
+tarjeta3.classList.remove("bloqueado");
+
+
+let boton3=tarjeta3.querySelector(".boton");
+
+
+boton3.textContent="Comenzar";
+
+
+boton3.href="nivel3.html";
+
+
+}
+
+// DESBLOQUEAR NIVEL 4
+
+if(niveles.nivel4){
+
+let tarjeta4=document.getElementById("nivel4");
+
+tarjeta4.classList.remove("bloqueado");
+
+let boton4=tarjeta4.querySelector(".boton");
+
+boton4.textContent="Comenzar";
+
+boton4.href="nivel4.html";
+
+}
+
+// DESBLOQUEAR NIVEL 5
+
+let nivelDesbloqueado = datos.data().nivelDesbloqueado;
+
+if(nivelDesbloqueado >= 5){
+
+let tarjeta5=document.getElementById("nivel5");
+
+tarjeta5.classList.remove("bloqueado");
+
+let boton5=tarjeta5.querySelector(".boton");
+
+boton5.textContent="Comenzar";
+
+boton5.href="nivel5.html";
+
+
+}
+
+}
+
+}
+
+});
+
+
+</script>
+</body>
+</html>

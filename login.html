@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Racha | Iniciar Sesión</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+
+background:linear-gradient(135deg,#e4d4ff,#5B21B6,#8B5CF6);
+
+height:100vh;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+overflow:hidden;
+
+}
+
+/* ============================= */
+
+.login{
+
+width:1150px;
+
+height:680px;
+
+background:white;
+
+border-radius:35px;
+
+overflow:hidden;
+
+display:flex;
+
+box-shadow:0 25px 60px rgba(0,0,0,.25);
+
+}
+
+/* ============================= */
+
+.izquierda{
+
+width:50%;
+
+background:linear-gradient(135deg,#7C3AED,#5B21B6);
+
+color:white;
+
+display:flex;
+
+flex-direction:column;
+
+align-items:center;
+
+justify-content:flex-start;
+
+padding:40px 60px;
+
+text-align:center;
+
+}
+
+.mascota{
+
+animation:flotar 3s ease-in-out infinite;
+
+margin-top:8px;
+
+margin-bottom:30px;
+
+}
+
+.mascota img{
+
+width:335px;
+
+height:auto;
+
+filter:drop-shadow(0 20px 25px rgba(0,0,0,.25));
+
+}
+
+@keyframes flotar{
+
+0%{transform:translateY(0);}
+50%{transform:translateY(-12px);}
+100%{transform:translateY(0);}
+
+}
+
+.izquierda h1{
+
+font-size:60px;
+
+margin-bottom:10px;
+
+font-weight:700;
+
+}
+
+.izquierda h2{
+
+font-size:34px;
+
+margin-bottom:20px;
+
+}
+
+.izquierda p{
+
+font-size:20px;
+
+line-height:1.8;
+
+opacity:.95;
+
+max-width:450px;
+
+}
+
+/* ============================= */
+
+.derecha{
+
+width:50%;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+padding:60px;
+
+background:#fff;
+
+}
+
+.formulario{
+
+width:100%;
+
+max-width:420px;
+
+}
+
+.logo-form{
+
+text-align:center;
+
+margin-bottom:20px;
+
+}
+
+.logo-form img{
+
+width:85px;
+
+}
+
+.formulario h2{
+
+font-size:38px;
+
+color:#5B21B6;
+
+text-align:center;
+
+margin-bottom:10px;
+
+}
+
+.formulario p{
+
+text-align:center;
+
+color:#777;
+
+margin-bottom:35px;
+
+}
+
+.input{
+
+margin-bottom:22px;
+
+}
+
+.input label{
+
+display:block;
+
+margin-bottom:8px;
+
+font-weight:600;
+
+color:#444;
+
+}
+
+.input input{
+
+width:100%;
+
+padding:16px;
+
+border:2px solid #E5E7EB;
+
+border-radius:15px;
+
+background:#FAFAFA;
+
+font-size:16px;
+
+transition:.3s;
+
+}
+
+.password-box{
+
+position:relative;
+
+width:100%;
+
+display:flex;
+
+align-items:center;
+
+}
+
+.password-box input{
+
+width:100%;
+
+padding-right:55px;
+
+}
+
+.ojo{
+
+position:absolute;
+
+right:18px;
+
+top:50%;
+
+transform:translateY(-50%);
+
+cursor:pointer;
+
+font-size:22px;
+
+color:#7C3AED;
+
+user-select:none;
+
+transition:.3s;
+
+}
+
+.ojo:hover{
+
+color:#5B21B6;
+
+}
+
+.input input:focus{
+
+outline:none;
+
+border-color:#905de2;
+
+background:white;
+
+box-shadow:0 0 0 5px rgba(124,58,237,.15);
+
+}
+
+.opciones{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+font-size:14px;
+
+
+margin-bottom:30px;
+
+}
+
+.opciones a{
+
+text-decoration:none;
+
+color:#7C3AED;
+
+font-weight:600;
+
+}
+
+button{
+
+width:100%;
+
+padding:18px;
+
+border:none;
+
+border-radius:50px;
+
+background:linear-gradient(90deg,#4ADE80,#22C55E);
+
+color:white;
+
+font-size:20px;
+
+font-weight:600;
+
+cursor:pointer;
+
+transition:.3s;
+
+box-shadow:0 10px 20px rgba(34,197,94,.35);
+
+}
+
+button:hover{
+
+transform:translateY(-3px);
+
+box-shadow:0 15px 30px rgba(34,197,94,.45);
+
+}
+
+.registro{
+
+text-align:center;
+
+margin-top:30px;
+
+font-size:15px;
+
+}
+
+.registro a{
+
+color:#8e5fe0;
+
+font-weight:600;
+
+text-decoration:none;
+
+}
+
+.registro a:hover{
+
+text-decoration:underline;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="login">
+
+<div class="izquierda">
+
+<div class="mascota">
+
+<img src="images/rachiña.png" alt="Racha">
+
+</div>
+
+<h2>¡Bienvenido!</h2>
+
+<p> Entra y haz crecer tu racha resolviendo desafíos matemáticos. Aprende jugando y conviértete
+en un maestro de las matemáticas.
+
+</p>
+
+</div>
+
+<div class="derecha">
+
+<div class="formulario">
+
+
+<h2>Iniciar Sesión</h2>
+
+<p>Ingresa para continuar tu aventura.</p>
+
+<form id="loginForm">
+
+<div class="input">
+
+<label>Correo electrónico</label>
+
+<input
+id="email"
+type="email"
+placeholder="ejemplo@correo.com"
+required>
+
+</div>
+
+<div class="input">
+
+<label>Contraseña</label>
+
+<div class="password-box">
+
+<input
+id="password"
+type="password"
+placeholder="********"
+required>
+
+<span class="ojo" id="ojoPassword"> ◉
+</span>
+
+</div>
+</div>
+
+<div class="opciones">
+
+<label>
+
+<input type="checkbox"> Recordarme
+
+</label>
+
+<a href="#">¿Olvidaste tu contraseña?</a>
+
+</div>
+
+<button type="submit">
+
+Iniciar sesión
+
+</button>
+
+</form>
+
+<div class="registro">
+
+¿No tienes una cuenta?
+
+<a href="registro.html">
+
+Crear cuenta
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
+
+import {
+getAuth,
+signInWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
+
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyDW4w9TOyboiDPjvxjiFrExPSjuX18Wshk",
+
+authDomain: "edugame-340db.firebaseapp.com",
+
+projectId: "edugame-340db",
+
+storageBucket: "edugame-340db.firebasestorage.app",
+
+messagingSenderId: "150012921820",
+
+appId: "1:150012921820:web:08a6a4aa18ae5a29ef3119"
+
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+
+document.getElementById("loginForm").addEventListener("submit", function(e){
+
+e.preventDefault();
+
+const email = document.getElementById("email").value;
+
+const password = document.getElementById("password").value;
+
+
+signInWithEmailAndPassword(auth,email,password)
+
+.then((userCredential)=>{
+
+window.location.href="inicio.html";
+
+})
+
+.catch((error)=>{
+
+console.log(error.message);
+
+});
+
+});
+
+const password = document.getElementById("password");
+const ojoPassword = document.getElementById("ojoPassword");
+
+ojoPassword.addEventListener("click", ()=>{
+
+if(password.type==="password"){
+
+password.type="text";
+
+ojoPassword.textContent="◎";
+
+}else{
+
+password.type="password";
+
+ojoPassword.textContent="◉";
+
+}
+
+});
+
+</script>
+
+</body>
+
+</html>

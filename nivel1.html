@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>EduGame | Nivel 1</title>
+
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+
+<style>
+
+
+*{
+
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+
+}
+
+
+
+body{
+
+min-height:100vh;
+
+background:linear-gradient(
+135deg,
+#dcfce7,
+#22c55e
+);
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+padding:25px;
+
+}
+
+
+
+
+/* CONTENEDOR DEL JUEGO */
+
+
+.juego{
+
+width:100%;
+
+max-width:600px;
+
+background:white;
+
+border-radius:35px;
+
+padding:40px;
+
+text-align:center;
+
+box-shadow:
+0 20px 50px rgba(0,0,0,.18);
+
+animation:aparecer .6s ease;
+
+
+}
+
+
+
+@keyframes aparecer{
+
+from{
+
+opacity:0;
+
+transform:translateY(30px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+
+}
+
+
+
+
+h1{
+
+font-size:40px;
+
+color:#15803d;
+
+margin-bottom:10px;
+
+}
+
+
+
+.descripcion{
+
+color:#666;
+
+font-size:18px;
+
+}
+
+
+
+
+/* INFORMACION */
+
+
+.estado{
+
+display:flex;
+
+justify-content:space-between;
+
+margin:30px 0;
+
+font-size:18px;
+
+font-weight:700;
+
+}
+
+
+
+.estado div{
+
+background:#dcfce7;
+
+padding:12px 20px;
+
+border-radius:25px;
+
+}
+
+
+
+
+/* PREGUNTA */
+
+
+.pregunta{
+
+font-size:30px;
+
+font-weight:700;
+
+color:#333;
+
+margin:35px 0;
+
+}
+
+
+
+
+/* OPCIONES */
+
+
+.opciones{
+
+display:flex;
+
+flex-direction:column;
+
+gap:15px;
+
+}
+
+
+
+.opciones button{
+
+padding:16px;
+
+border:none;
+
+border-radius:20px;
+
+font-size:20px;
+
+font-weight:600;
+
+cursor:pointer;
+
+background:#f3f4f6;
+
+transition:.3s;
+
+}
+
+
+
+.opciones button:hover{
+
+background:#bbf7d0;
+
+transform:scale(1.03);
+
+}
+
+
+
+
+/* RESPUESTAS */
+
+
+.correcta{
+
+background:#22c55e!important;
+
+color:white;
+
+}
+
+
+
+.incorrecta{
+
+background:#ef4444!important;
+
+color:white;
+
+}
+
+
+
+
+/* MENSAJE */
+
+
+#mensaje{
+
+margin-top:25px;
+
+font-size:18px;
+
+font-weight:700;
+
+min-height:30px;
+
+}
+
+
+
+
+/* BOTON NIVEL 2 */
+
+
+#btnNivel2{
+
+margin-top:20px;
+
+padding:15px 45px;
+
+border:none;
+
+border-radius:40px;
+
+background:#22c55e;
+
+color:white;
+
+font-size:20px;
+
+font-weight:700;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+
+
+#btnNivel2:hover{
+
+background:#15803d;
+
+transform:scale(1.05);
+
+}
+
+
+
+
+
+/* VOLVER */
+
+
+.volver{
+
+display:block;
+
+margin-top:30px;
+
+text-decoration:none;
+
+color:#15803d;
+
+font-weight:700;
+
+}
+
+
+
+
+/* RESPONSIVE */
+
+
+@media(max-width:600px){
+
+
+.juego{
+
+padding:25px;
+
+}
+
+
+h1{
+
+font-size:32px;
+
+}
+
+
+.pregunta{
+
+font-size:24px;
+
+}
+
+
+.estado{
+
+flex-direction:column;
+
+gap:15px;
+
+}
+
+
+}
+
+
+</style>
+
+
+</head>
+
+<body>
+
+
+<div class="juego">
+
+
+<h1>
+Nivel 1
+</h1>
+
+
+<p class="descripcion">
+Explorador Matemático
+</p>
+
+
+
+
+<!-- ESTADO DEL JUGADOR -->
+
+<div class="estado">
+
+
+<div>
+❤️ :
+<span id="vidas">
+3
+</span>
+</div>
+
+
+
+<div>
+⭐ XP:
+<span id="xp">
+0
+</span>
+</div>
+
+
+</div>
+
+
+
+
+
+<!-- PREGUNTA -->
+
+<div 
+class="pregunta"
+id="pregunta">
+
+Cargando pregunta...
+
+</div>
+
+
+
+
+
+<!-- RESPUESTAS -->
+
+<div class="opciones">
+
+
+<button id="op0">
+</button>
+
+
+<button id="op1">
+</button>
+
+
+<button id="op2">
+</button>
+
+
+<button id="op3">
+</button>
+
+
+</div>
+
+
+
+
+
+<!-- MENSAJE -->
+
+<div id="mensaje">
+
+</div>
+
+
+
+
+
+<!-- BOTÓN NIVEL 2 -->
+
+<button 
+id="btnNivel2"
+style="display:none;">
+
+Ir al Nivel 2 
+
+</button>
+
+
+
+
+
+<a href="niveles.html" class="volver">
+
+⬅ Volver a niveles
+
+</a>
+
+
+
+
+</div>
+
+<script type="module">
+
+
+// =====================================
+// FIREBASE
+// =====================================
+
+
+import { initializeApp } 
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+
+import { 
+getAuth 
+} 
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+
+import {
+
+getFirestore,
+doc,
+setDoc,
+increment
+
+}
+
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+
+
+
+const firebaseConfig = {
+
+
+apiKey: "AIzaSyDW4w9TOyboiDPjvxjiFrExPSjuX18Wshk",
+
+authDomain: "edugame-340db.firebaseapp.com",
+
+projectId: "edugame-340db",
+
+storageBucket: "edugame-340db.firebasestorage.app",
+
+messagingSenderId: "150012921820",
+
+appId: "1:150012921820:web:08a6a4aa18ae5a29ef3119"
+
+
+};
+
+
+
+
+
+const app = initializeApp(firebaseConfig);
+
+
+const auth = getAuth(app);
+
+
+const db = getFirestore(app);
+
+
+
+
+
+// =====================================
+// PREGUNTAS
+// =====================================
+
+
+
+const preguntas = [
+
+
+{
+
+pregunta:"¿Cuánto es 5 + 3?",
+
+opciones:["8","7","10","6"],
+
+respuesta:0
+
+},
+
+
+{
+
+pregunta:"¿Cuánto es 10 - 4?",
+
+opciones:["4","6","8","5"],
+
+respuesta:1
+
+},
+
+
+{
+
+pregunta:"¿Cuánto es 7 + 3?",
+
+opciones:["9","12","10","8"],
+
+respuesta:2
+
+},
+
+
+{
+
+pregunta:"¿Cuánto es 16 - 10?",
+
+opciones:["5","6","8","10"],
+
+respuesta:1
+
+}
+
+
+];
+
+
+
+
+
+// =====================================
+// VARIABLES
+// =====================================
+
+
+let posicion = 0;
+
+
+let xp = 0;
+
+
+let vidas = 3;
+
+
+let seleccion = null;
+
+
+
+
+
+// =====================================
+// CARGAR PREGUNTA
+// =====================================
+
+
+
+function cargarPregunta(){
+
+
+seleccion=null;
+
+
+
+let preguntaActual = preguntas[posicion];
+
+
+
+document.getElementById("pregunta").textContent =
+preguntaActual.pregunta;
+
+
+
+for(let i=0;i<4;i++){
+
+
+document.getElementById("op"+i).textContent =
+preguntaActual.opciones[i];
+
+
+document.getElementById("op"+i).className="";
+
+
+}
+
+
+
+}
+
+
+
+
+
+// =====================================
+// SELECCIONAR RESPUESTA
+// =====================================
+
+
+
+document.querySelectorAll(".opciones button")
+.forEach((boton,index)=>{
+
+
+
+boton.onclick=()=>{
+
+
+seleccion=index;
+
+
+document.querySelectorAll(".opciones button")
+.forEach(b=>b.style.border="none");
+
+
+
+boton.style.border=
+"3px solid #15803d";
+
+
+
+};
+
+
+});
+
+
+
+
+
+
+// =====================================
+// RESPONDER
+// =====================================
+
+
+
+document.getElementById("op0").onclick=()=>{
+seleccion=0;
+responder();
+};
+
+
+document.getElementById("op1").onclick=()=>{
+seleccion=1;
+responder();
+};
+
+
+document.getElementById("op2").onclick=()=>{
+seleccion=2;
+responder();
+};
+
+
+document.getElementById("op3").onclick=()=>{
+seleccion=3;
+responder();
+};
+
+
+
+function responder(){
+
+
+if(seleccion===null){
+
+alert("Selecciona una respuesta");
+
+return;
+
+}
+
+
+
+
+let correcta =
+preguntas[posicion].respuesta;
+
+
+
+
+if(seleccion===correcta){
+
+
+xp+=50;
+
+
+document.getElementById("xp").textContent=xp;
+
+
+document.getElementById("mensaje").textContent=
+"Correcto +50 XP";
+
+
+
+}else{
+
+
+vidas--;
+
+
+document.getElementById("vidas").textContent=vidas;
+
+
+document.getElementById("mensaje").textContent=
+"Incorrecto";
+
+
+if(vidas<=0){
+
+
+document.getElementById("pregunta").textContent=
+"Has perdido";
+
+
+document.querySelector(".opciones").style.display="none";
+
+
+return;
+
+
+}
+
+
+
+}
+
+
+
+
+
+setTimeout(()=>{
+
+
+posicion++;
+
+
+
+if(posicion<preguntas.length){
+
+
+document.getElementById("mensaje").textContent="";
+
+cargarPregunta();
+
+
+
+}else{
+
+
+terminarNivel();
+
+
+}
+
+
+
+},1000);
+
+
+
+}
+
+
+
+
+
+cargarPregunta();
+
+// =====================================
+// TERMINAR NIVEL
+// =====================================
+
+
+async function terminarNivel(){
+
+
+
+document.getElementById("pregunta").textContent =
+"Nivel completado";
+
+
+
+document.querySelector(".opciones").style.display="none";
+
+
+
+document.getElementById("mensaje").innerHTML = `
+
+<h3>
+Ganaste ${xp} XP ⭐
+</h3>
+
+<p>
+¡Has desbloqueado el Nivel 2!
+</p>
+
+`;
+
+
+
+// Mostrar botón Nivel 2
+
+const botonNivel2 =
+document.getElementById("btnNivel2");
+
+
+botonNivel2.style.display="inline-block";
+
+
+
+
+
+// Guardar progreso
+
+await guardarProgreso();
+
+
+
+}
+
+
+
+
+
+
+
+// =====================================
+// GUARDAR EN FIREBASE
+// =====================================
+
+
+
+async function guardarProgreso(){
+
+
+
+const usuario = auth.currentUser;
+
+
+
+if(!usuario){
+
+
+console.log(
+"No hay usuario conectado"
+);
+
+
+return;
+
+
+}
+
+
+
+
+
+try{
+
+
+await setDoc(
+
+
+doc(db,"usuarios",usuario.uid),
+
+
+{
+
+
+xp:increment(xp),
+
+
+nivelActual:2,
+
+
+niveles:{
+
+
+nivel1:true,
+
+
+nivel2:true
+
+
+}
+
+
+
+},
+
+
+{
+
+merge:true
+
+}
+
+
+);
+
+
+
+console.log(
+"Nivel 2 desbloqueado correctamente"
+);
+
+
+
+}
+
+catch(error){
+
+
+console.error(
+"Error guardando progreso:",
+error
+);
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+
+// =====================================
+// BOTÓN IR AL NIVEL 2
+// =====================================
+
+
+
+document
+.getElementById("btnNivel2")
+.onclick=function(){
+
+
+window.location.href="nivel2.html";
+
+
+};
+
+
+
+</script>
+
+
+</body>
+
+</html> 
